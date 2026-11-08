@@ -372,6 +372,7 @@ section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hai
 .lp-notifs { gap: 12px; }
 .lp-label { font-size: 10px; font-weight: 600; letter-spacing: 1.1px; text-transform: uppercase; color: var(--c-ink3); }
 .lp-div { height: 1px; flex: none; background: var(--c-div); }
+.lp-settings { display: flex; flex-direction: column; gap: 12px; }
 .lp-col { display: flex; flex-direction: column; gap: 10px; }
 .lp-col8 { display: flex; flex-direction: column; gap: 8px; }
 .lp-row { display: flex; align-items: center; gap: 10px; }
@@ -530,14 +531,15 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
           <span class="lp-sp"></span>
           <a class="lp-donate" href="/support/" title="Lidlit is free. If you like it, you can chip in."><i data-i="heart" data-s="13"></i>Donate</a>
         </div>
-        <div class="lp-card" id="d-settings" hidden>
-          <div class="lp-col8">
-            <div class="lp-row"><span class="lp-label">Schedule</span><span class="lp-sp"></span><button class="lp-pill" data-act="add"><i data-i="plus" data-s="13" data-w="semibold"></i>Add</button></div>
-            <div class="lp-col8" id="rules" hidden></div>
+        <div class="lp-settings" id="d-settings" hidden>
+          <div class="lp-card">
+            <div class="lp-col8">
+              <div class="lp-row"><span class="lp-label">Schedule</span><span class="lp-sp"></span><button class="lp-pill" data-act="add"><i data-i="plus" data-s="13" data-w="semibold"></i>Add</button></div>
+              <div class="lp-col8" id="rules" hidden></div>
+            </div>
           </div>
-          <div class="lp-div"></div>
-          <div class="lp-row6">
-            <button class="lp-pill on" id="login" data-act="login"></button>
+          <div class="lp-row6" style="padding: 0 2px">
+            <button class="lp-pill on" id="login" data-act="login" title="Start Lidlit when you log in"></button>
             <span class="lp-sp"></span>
             <button class="lp-pill" data-act="reset" title="Hand the logo back to macOS"><i data-i="arrow.counterclockwise" data-s="13" data-w="semibold"></i>Reset</button>
             <button class="lp-pill" data-act="quit" title="The logo keeps its current look after quitting"><i data-i="xmark" data-s="13" data-w="semibold"></i>Quit</button>
