@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Lidlight</title>
-<meta name="description" content="Lidlight makes the glowing logo on your MacBook Pro lid useful: a quiet glow while you work, a blink when Claude is done or mail arrives.">
-<meta property="og:title" content="Lidlight">
+<title>Lidlit</title>
+<meta name="description" content="Lidlit makes the glowing logo on your MacBook Pro lid useful: a quiet glow while you work, a blink when Claude is done or mail arrives.">
+<meta property="og:title" content="Lidlit">
 <meta property="og:description" content="Your lid, lit.">
-<meta property="og:image" content="https://lidlight.app/img/icon.png">
+<meta property="og:image" content="https://lidlit.app/img/icon.png">
 <link rel="icon" type="image/png" href="img/icon.png">
 <link rel="apple-touch-icon" href="img/icon.png">
 <style>
@@ -99,6 +99,56 @@ section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hai
 .sym.sent { opacity: 1; background: var(--ink-2); }
 .sym.lit { opacity: 1; background: var(--ink); height: 6px; box-shadow: 0 0 6px rgba(255,255,255,.7); }
 
+
+/* Try-it panel: a working copy of the menu-bar panel. */
+.try { display: grid; justify-items: center; gap: 12px; margin-top: 34px; }
+.try .hint { color: var(--ink-3); font-size: .85rem; }
+.panel { width: min(340px, 100%); text-align: left; background: #1c1c1e; border-radius: 22px; padding: 16px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 30px 80px -30px rgba(255,255,255,.12); display: grid; gap: 14px;
+  font-size: 15px; -webkit-user-select: none; user-select: none; }
+.p-head { display: flex; align-items: center; gap: 12px; }
+.p-head img { width: 38px; height: 38px; border-radius: 50%; }
+.p-head .t { flex: 1; min-width: 0; }
+.p-head b { display: block; font-size: 1.15rem; font-weight: 700; line-height: 1.2; }
+.p-head .st { color: var(--ink-2); font-size: .9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.power { width: 50px; height: 30px; border-radius: 999px; border: 0; cursor: pointer; position: relative; background: #3a3a3c; transition: background .2s; flex: none; }
+.power::after { content: ""; position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: #8e8e93; transition: transform .2s, background .2s; }
+.power[aria-checked="true"] { background: #f5f5f7; }
+.power[aria-checked="true"]::after { transform: translateX(20px); background: #2c2c2e; }
+.lid { position: relative; height: 128px; border-radius: 14px; background: linear-gradient(#e6e6e9, #c9c9ce);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.5); display: grid; place-items: center; overflow: hidden; }
+.lid .logo { width: 30px; height: 38px; -webkit-mask: url(img/logo-mask.png) center / contain no-repeat; mask: url(img/logo-mask.png) center / contain no-repeat; background: #121212; }
+.lid .logo-wrap { filter: drop-shadow(0 0 0 transparent); }
+.lid .lbl { position: absolute; left: 12px; bottom: 9px; font-size: 10px; font-weight: 600; letter-spacing: .12em; color: #8a8a8f; }
+.modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.mode { border: 0; cursor: pointer; border-radius: 12px; padding: 10px 4px 8px; display: grid; justify-items: center; gap: 4px;
+  background: #2c2c2e; color: var(--ink-2); font: 500 .88rem var(--font); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
+.mode svg { width: 24px; height: 24px; }
+.mode[aria-pressed="true"] { background: #3a3a3c; color: var(--ink); font-weight: 600; box-shadow: none; }
+.p-slider { display: flex; align-items: center; gap: 10px; color: var(--ink-3); }
+.p-slider svg { width: 16px; height: 16px; flex: none; } .p-slider svg.big { width: 20px; height: 20px; }
+.p-slider input { flex: 1; min-width: 0; accent-color: #f5f5f7; }
+.p-row { display: flex; align-items: center; justify-content: flex-end; gap: 10px; color: var(--ink-2); font-size: .88rem; }
+.pill { border: 0; cursor: pointer; border-radius: 999px; padding: 3px 11px; font: 600 .78rem var(--font); background: transparent;
+  color: var(--ink-2); box-shadow: inset 0 0 0 1px rgba(255,255,255,.18); min-width: 44px; }
+.pill[aria-pressed="true"] { background: #f5f5f7; color: #000; box-shadow: none; }
+.tabs { display: flex; justify-content: space-between; padding-inline: 4px; }
+.tab { border: 0; background: none; cursor: pointer; color: var(--ink-2); font: 600 .95rem var(--font); display: flex; align-items: center; gap: 6px; padding: 4px 2px; }
+.tab svg { width: 15px; height: 15px; }
+.tab[aria-selected="true"] { color: var(--ink); }
+.drawer { display: grid; gap: 8px; }
+.drawer[hidden] { display: none; }
+.cue { display: flex; justify-content: space-between; align-items: center; gap: 10px; border: 0; cursor: pointer; text-align: left;
+  border-radius: 12px; padding: 10px 12px; background: #2c2c2e; color: var(--ink); font: 500 .9rem var(--font); }
+.cue .k { color: var(--ink-3); font-size: .8rem; }
+.cue.on { box-shadow: inset 0 0 0 1.5px var(--ink); }
+.drawer .morse-row { margin-top: 0; }
+.drawer .morse-row input { background: #2c2c2e; font-size: .9rem; }
+.drawer .track { margin-top: 0; min-height: 28px; gap: 8px; }
+.seg { display: flex; gap: 6px; }
+.seg .chip { flex: 1; }
+.p-k { color: var(--ink-3); font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+
 /* Download */
 .download { text-align: center; display: grid; justify-items: center; gap: 14px; }
 .steps { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; color: var(--ink-2); font-size: .92rem; }
@@ -114,7 +164,7 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
 <div class="wrap">
   <nav>
     <span class="mark" aria-hidden="true"></span>
-    <span class="name">Lidlight</span>
+    <span class="name">Lidlit</span>
     <span class="spacer"></span>
     <a class="btn small" href="#download">Download</a>
   </nav>
@@ -126,7 +176,44 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
       <a class="btn" href="#download">Download for Mac</a>
       <a class="btn ghost" href="#faq">FAQ</a>
     </div>
-    <img class="shot hero-shot" src="img/app-main.png" width="330" alt="Lidlight in the menu bar: a live preview of the lid, Steady, Breathe and Follow, and a brightness slider">
+    <div class="try">
+      <div class="panel" id="panel" aria-label="Try Lidlit">
+        <div class="p-head">
+          <img src="img/icon.png" alt="">
+          <div class="t"><b>Lidlit</b><div class="st" id="st" aria-live="polite">Glowing at 60%</div></div>
+          <button class="power" id="power" role="switch" aria-checked="true" aria-label="Light on"></button>
+        </div>
+        <div class="lid"><div class="logo-wrap" id="glowf"><div class="logo" id="logo"></div></div><span class="lbl" id="lbl">STEADY</span></div>
+        <div class="modes">
+          <button class="mode" data-mode="steady" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.5 1.5M17.2 17.2l1.5 1.5M5.3 18.7l1.5-1.5M17.2 6.8l1.5-1.5"/></svg>Steady</button>
+          <button class="mode" data-mode="breathe" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 9h11a3 3 0 1 0-3-3M3 13h15a3 3 0 1 1-3 3M3 17h7"/></svg>Breathe</button>
+          <button class="mode" data-mode="follow" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12.5" rx="1.8"/><path d="M9 20.5h6M12 16.5v4"/></svg>Follow</button>
+        </div>
+        <label class="p-slider"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3.6"/><path d="M12 3.5v2M12 18.5v2M3.5 12h2M18.5 12h2M6 6l1.4 1.4M16.6 16.6L18 18M6 18l1.4-1.4M16.6 7.4L18 6"/></svg><input id="lvl" type="range" min="1" max="100" value="60" aria-label="Brightness"><span class="big"><svg class="big" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3.6"/><path d="M12 3.5v2M12 18.5v2M3.5 12h2M18.5 12h2M6 6l1.4 1.4M16.6 16.6L18 18M6 18l1.4-1.4M16.6 7.4L18 6"/></svg></span></label>
+        <div class="p-row">Auto-dim <button class="pill" id="auto" aria-pressed="true">On</button></div>
+        <div class="tabs" role="tablist">
+          <button class="tab" role="tab" data-tab="settings" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/><circle cx="9" cy="7" r="2" fill="#1c1c1e"/><circle cx="15" cy="12" r="2" fill="#1c1c1e"/><circle cx="8" cy="17" r="2" fill="#1c1c1e"/></svg>Settings</button>
+          <button class="tab" role="tab" data-tab="notifs" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg>Notifications</button>
+          <button class="tab" role="tab" data-tab="morse" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="6" cy="12" r="1.4" fill="currentColor"/><path d="M10 8.5a5 5 0 0 1 0 7M13.5 6a8.5 8.5 0 0 1 0 12M17 3.5a12 12 0 0 1 0 17"/></svg>Morse</button>
+        </div>
+        <div class="drawer" id="d-settings" hidden>
+          <span class="p-k">Breathing speed</span>
+          <div class="seg"><button class="chip" data-speed="7">Slow</button><button class="chip" data-speed="4.4" aria-pressed="true">Normal</button><button class="chip" data-speed="2.6">Fast</button></div>
+        </div>
+        <div class="drawer" id="d-notifs">
+          <button class="cue" data-cue="doubleSwell">Claude finished <span class="k">Double swell</span></button>
+          <button class="cue" data-cue="tripleBlink">Claude needs you <span class="k">Triple blink</span></button>
+          <button class="cue" data-cue="longPulse">ChatGPT finished <span class="k">Long pulse</span></button>
+          <button class="cue" data-cue="heartbeat">New email <span class="k">Heartbeat</span></button>
+          <button class="cue" data-cue="beacon">New chat message <span class="k">Beacon</span></button>
+        </div>
+        <div class="drawer" id="d-morse" hidden>
+          <form class="morse-row" id="mform"><input id="mtext" maxlength="16" value="HELLO" aria-label="Message" autocomplete="off" spellcheck="false"><button class="btn small">Send</button></form>
+          <div class="track" id="mtrack"></div>
+        </div>
+      </div>
+      <p class="hint">Try it. Tap a notification to see the lid flash.</p>
+    </div>
   </div>
 
   <section id="modes">
@@ -163,7 +250,7 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
     <h2 style="margin-bottom:22px">Questions</h2>
     <div class="faq">
       <details><summary>How much CPU does it use?</summary><p>None you can measure: 0.0 % at rest. While breathing, macOS does the fading itself (about 2 % in its own brightness service).</p></details>
-      <details><summary>Does it drain the battery?</summary><p>Lidlight itself barely does anything. The light uses a little power, like any LED, and less at lower brightness. Turn it off any time.</p></details>
+      <details><summary>Does it drain the battery?</summary><p>Lidlit itself barely does anything. The light uses a little power, like any LED, and less at lower brightness. Turn it off any time.</p></details>
       <details><summary>Does it work with the lid closed?</summary><p>Yes. Turn on Keep the glow, or let only notifications flash.</p></details>
       <details><summary>Which Macs?</summary><p>MacBook Pro XDR with a lit logo, macOS 14 or later.</p></details>
       <details><summary>Can it change color?</summary><p>No. The logo has a single white light, so signals use rhythm instead.</p></details>
@@ -176,14 +263,14 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
   <section id="download">
     <div class="download">
       <img src="img/icon.png" alt="" width="96" height="96" style="border-radius:22px">
-      <h2>Get Lidlight.</h2>
+      <h2>Get Lidlit.</h2>
       <p class="muted">Free. For MacBook Pro XDR.</p>
-      <a class="btn" href="https://github.com/Lafsen/lidlight-site/releases/latest/download/Lidlight.dmg">Download Lidlight.dmg</a>
+      <a class="btn" href="https://github.com/Lafsen/lidlit-site/releases/latest/download/Lidlit.dmg">Download Lidlit.dmg</a>
     </div>
   </section>
 
   <footer>
-    <span>Lidlight 1.0</span>
+    <span>Lidlit 1.0</span>
     <span>Lives in your menu bar · 0 % CPU when idle</span>
     <span>Not affiliated with Apple.</span>
   </footer>
@@ -203,6 +290,129 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
   if (reduce) { set(.85, 0); return; }
   let up = true;
   setTimeout(() => { set(.85, 2.2); setInterval(() => { up = !up; set(up ? .85 : 0, 2.2); }, 2400); }, 400);
+})();
+</script>
+
+<script>
+// The try-it panel: same modes, rhythms and Morse timing as the app, drawn on a lid.
+(() => {
+  const $ = id => document.getElementById(id);
+  const logo = $('logo'), glowf = $('glowf'), st = $('st'), lbl = $('lbl'), lvl = $('lvl'), power = $('power');
+  const S = { on: true, mode: 'steady', level: 60, period: 4.4, auto: true };
+  let shown = 0.6, seq = null, seqName = '', t0 = 0, onDone = null;
+
+  const blink = (on, off) => [[1, .05, on], [0, .06, off]];
+  const rep = (a, n) => Array(n).fill(a).flat();
+  const P = {
+    doubleSwell: [[1,.45,.3],[0,.45,.35],[1,.45,.3],[0,.45,.3]],
+    tripleBlink: rep([...blink(.2,.2), ...blink(.2,.2), ...blink(.2,.7)], 2),
+    heartbeat: rep([...blink(.15,.15), ...blink(.15,.8)], 3),
+    longPulse: [[1,.8,1.4],[0,.8,.3]],
+    beacon: rep(blink(.5,.5), 5),
+  };
+  const NAMES = { doubleSwell: 'Claude finished', tripleBlink: 'Claude needs you', longPulse: 'ChatGPT finished', heartbeat: 'New email', beacon: 'New chat message' };
+
+  function play(steps, name, done) {
+    // Each step fades from the previous level; the first starts from what's showing.
+    seq = [[shown, 0, 0], ...steps, [0, .06, .25]]; seqName = name; t0 = performance.now() / 1000; onDone = done;
+    status();
+  }
+  function seqLevel(t) {
+    let at = 0, prev = seq[0][0];
+    for (const [l, f, h] of seq) {
+      if (t < at + f) return prev + (l - prev) * (t - at) / f;
+      if (t < at + f + h) return l;
+      at += f + h; prev = l;
+    }
+    return null;
+  }
+  function base(now) {
+    if (!S.on) return 0;
+    const L = S.level / 100 * (S.auto ? .85 : 1);
+    if (S.mode === 'breathe') return L * (.5 - .5 * Math.cos(now * 2 * Math.PI / S.period));
+    if (S.mode === 'follow') return L * .8;
+    return L;
+  }
+  function draw(v) {
+    // Same look as the app preview: dark when off, opaque white once lit, a tight glow.
+    const x = Math.min(1, v), fill = Math.pow(x, .45);
+    const w = Math.round(255 * (.07 + .93 * fill));
+    logo.style.background = `rgb(${w},${w},${w})`;
+    glowf.style.filter = `drop-shadow(0 0 ${2 + 6 * x}px rgba(255,255,255,${(.9 * fill * (.3 + .7 * x)).toFixed(3)}))`;
+  }
+  function status() {
+    if (seq) { st.textContent = seqName; lbl.textContent = seqName.startsWith('Morse') ? 'MORSE' : 'NOTIFICATION'; return; }
+    lbl.textContent = S.on ? S.mode.toUpperCase() : 'OFF';
+    st.textContent = !S.on ? 'Off' : S.mode === 'breathe' ? 'Breathing' : S.mode === 'follow' ? 'Following your screen' : `Glowing at ${S.level}%`;
+  }
+  function frame(ms) {
+    const now = ms / 1000;
+    if (seq) {
+      const v = seqLevel(now - t0);
+      if (v === null) { seq = null; const d = onDone; onDone = null; status(); d && d(); }
+      else shown = v;
+    }
+    if (!seq) { const target = base(now); shown += (target - shown) * (S.mode === 'breathe' ? 1 : .12); }
+    draw(Math.max(0, shown));
+    requestAnimationFrame(frame);
+  }
+
+  power.onclick = () => { S.on = !S.on; power.setAttribute('aria-checked', S.on); power.ariaLabel = S.on ? 'Light on' : 'Light off'; status(); };
+  document.querySelectorAll('.mode').forEach(b => b.onclick = () => {
+    S.mode = b.dataset.mode; if (!S.on) power.onclick();
+    document.querySelectorAll('.mode').forEach(x => x.setAttribute('aria-pressed', x === b)); status();
+  });
+  lvl.oninput = () => { S.level = +lvl.value; if (!S.on) power.onclick(); status(); };
+  $('auto').onclick = e => { S.auto = !S.auto; e.target.setAttribute('aria-pressed', S.auto); e.target.textContent = S.auto ? 'On' : 'Off'; };
+  document.querySelectorAll('.tab').forEach(b => b.onclick = () => {
+    document.querySelectorAll('.tab').forEach(x => { x.setAttribute('aria-selected', x === b); $('d-' + x.dataset.tab).hidden = x !== b; });
+  });
+  document.querySelectorAll('[data-speed]').forEach(b => b.onclick = () => {
+    S.period = +b.dataset.speed; document.querySelectorAll('[data-speed]').forEach(x => x.setAttribute('aria-pressed', x === b));
+  });
+  document.querySelectorAll('.cue').forEach(b => b.onclick = () => {
+    stopMorse(); document.querySelectorAll('.cue').forEach(x => x.classList.toggle('on', x === b));
+    play(P[b.dataset.cue], NAMES[b.dataset.cue], () => b.classList.remove('on'));
+  });
+
+  // Morse: unit 0.25 s, dash = 3 units, letter gap 3, word gap 7 — like the app.
+  const M = { A:'.-',B:'-...',C:'-.-.',D:'-..',E:'.',F:'..-.',G:'--.',H:'....',I:'..',J:'.---',K:'-.-',L:'.-..',M:'--',N:'-.',O:'---',P:'.--.',Q:'--.-',R:'.-.',S:'...',T:'-',U:'..-',V:'...-',W:'.--',X:'-..-',Y:'-.--',Z:'--..',
+    0:'-----',1:'.----',2:'..---',3:'...--',4:'....-',5:'.....',6:'-....',7:'--...',8:'---..',9:'----.' };
+  const mtext = $('mtext'), track = $('mtrack'); let timers = [];
+  function renderTrack() {
+    track.innerHTML = '';
+    for (const ch of mtext.value.toUpperCase()) {
+      if (!M[ch]) continue;
+      const d = document.createElement('span'); d.className = 'letter';
+      d.innerHTML = `<span class="syms">${[...M[ch]].map(c => `<i class="sym ${c === '.' ? 'dot' : 'dash'}"></i>`).join('')}</span>${ch}`;
+      track.appendChild(d);
+    }
+  }
+  function stopMorse() { timers.forEach(clearTimeout); timers = []; track.querySelectorAll('.sym').forEach(x => x.classList.remove('lit', 'sent')); track.querySelectorAll('.letter').forEach(x => x.classList.remove('cur')); }
+  mtext.oninput = () => { const p = mtext.selectionStart; mtext.value = mtext.value.toUpperCase().replace(/[^A-Z0-9 ]/g, ''); mtext.setSelectionRange(p, p); stopMorse(); renderTrack(); };
+  $('mform').onsubmit = e => {
+    e.preventDefault(); stopMorse(); document.querySelectorAll('.cue').forEach(x => x.classList.remove('on'));
+    const u = .25, steps = [], letters = track.querySelectorAll('.letter'); let t = .06, li = 0;
+    const words = mtext.value.toUpperCase().trim().split(/\s+/);
+    words.forEach((w, wi) => {
+      [...w].forEach((ch, ci) => {
+        if (!M[ch]) return;
+        const el = letters[li++], syms = el.querySelectorAll('.sym');
+        [...M[ch]].forEach((c, k) => {
+          const on = (c === '-' ? 3 : 1) * u, at = t;
+          timers.push(setTimeout(() => { letters.forEach(x => x.classList.toggle('cur', x === el)); syms[k].classList.add('lit'); }, at * 1000));
+          timers.push(setTimeout(() => { syms[k].classList.replace('lit', 'sent'); }, (at + on) * 1000));
+          const last = k === M[ch].length - 1, gap = last ? (ci === w.length - 1 && wi < words.length - 1 ? 7 : 3) * u : u;
+          steps.push([1, .04, on - .04], [0, .06, gap - .06]); t += on + gap;
+        });
+      });
+    });
+    if (!steps.length) return;
+    timers.push(setTimeout(() => letters.forEach(x => x.classList.remove('cur')), t * 1000));
+    play(steps, 'Morse · ' + mtext.value.trim().toUpperCase());
+  };
+  renderTrack();
+  requestAnimationFrame(frame);
 })();
 </script>
 </body>
