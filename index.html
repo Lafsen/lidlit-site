@@ -55,14 +55,14 @@
    "priceCurrency": "USD"
   },
   "featureList": [
-   "Glow, pulse, or follow the screen brightness",
+   "Glow at a fixed brightness or follow the screen; pulse slowly",
    "Auto-dim to room light",
    "Blink when Claude Code or Codex finishes or needs you",
    "Blink for new email and chat messages",
    "Morse code messages",
    "Schedule",
-   "Keeps glowing with the lid closed",
-   "Command-line tool and URL scheme"
+   "Keeps glowing with the lid closed, still adjustable",
+   "Command-line tool and URL scheme for scripts, Shortcuts and AI agents"
   ]
  },
  {
@@ -89,6 +89,22 @@
    },
    {
     "@type": "Question",
+    "name": "How do I turn off the glowing Apple logo on my MacBook Pro?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Install Lidlit and flip the switch at the top of its menu. The logo stays dark, with the lid open or closed. Reset hands the light back to macOS, which ties it to the screen brightness."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "Can I keep the Apple logo lit, or make it brighter?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Yes. Glow keeps it lit at the brightness you pick, independent of the screen, up to full brightness. It can keep glowing with the lid closed, and you can still adjust it there."
+    }
+   },
+   {
+    "@type": "Question",
     "name": "How much CPU does it use?",
     "acceptedAnswer": {
      "@type": "Answer",
@@ -108,7 +124,7 @@
     "name": "Does it work with the lid closed?",
     "acceptedAnswer": {
      "@type": "Answer",
-     "text": "Yes. With the lid closed, the laptop button on the lid preview keeps it glowing, and alerts can still flash on their own."
+     "text": "Yes. With the lid closed, the laptop button on the lid preview keeps it glowing, and the slider, Pulse and alerts all still work there. Alerts can also flash on their own while the rest stays dark."
     }
    },
    {
@@ -584,9 +600,11 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
     <h2 style="margin-bottom:22px">Questions</h2>
     <div class="faq">
       <details><summary>What is Lidlit?</summary><p>A free menu bar app for macOS that controls the glowing Apple logo on the lid of a MacBook Pro XDR. It can glow steadily, pulse, follow your screen, blink when Claude, ChatGPT, email or chat needs you, and spell messages in Morse code.</p></details>
+      <details><summary>How do I turn off the glowing Apple logo on my MacBook Pro?</summary><p>Install Lidlit and flip the switch at the top of its menu. The logo stays dark, with the lid open or closed. Reset hands the light back to macOS, which ties it to the screen brightness.</p></details>
+      <details><summary>Can I keep the Apple logo lit, or make it brighter?</summary><p>Yes. Glow keeps it lit at the brightness you pick, independent of the screen, up to full brightness. It can keep glowing with the lid closed, and you can still adjust it there.</p></details>
       <details><summary>How much CPU does it use?</summary><p>None you can measure: 0.0 % at rest. While pulsing, macOS does the fading itself (about 2 % in its own brightness service).</p></details>
       <details><summary>Does it drain the battery?</summary><p>Lidlit itself barely does anything. The light uses a little power, like any LED, and less at lower brightness. Turn it off any time.</p></details>
-      <details><summary>Does it work with the lid closed?</summary><p>Yes. With the lid closed, the laptop button on the lid preview keeps it glowing, and alerts can still flash on their own.</p></details>
+      <details><summary>Does it work with the lid closed?</summary><p>Yes. With the lid closed, the laptop button on the lid preview keeps it glowing, and the slider, Pulse and alerts all still work there. Alerts can also flash on their own while the rest stays dark.</p></details>
       <details><summary>Which Macs?</summary><p>MacBook Pro XDR with a lit logo, macOS 14 or later.</p></details>
       <details><summary>Can it change color?</summary><p>No. The logo has a single white light, so signals use rhythm instead.</p></details>
       <details><summary>Does it read my email or messages?</summary><p>No. It only sees the unread count on an app's Dock icon, and only for apps you turn on. Nothing leaves your Mac.</p></details>

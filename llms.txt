@@ -5,18 +5,30 @@
 - Download (free, 1.6 MB DMG): https://github.com/Lafsen/lidlit-site/releases/latest/download/Lidlit.dmg
 - Requirements: MacBook Pro XDR with a lit logo, macOS 14 or later, Apple silicon.
 - Not on the Mac App Store: the App Store doesn't allow apps that drive the logo light. It's signed with an Apple Developer ID and notarized by Apple, so it opens without warnings.
-- Price: free. Optional tips: https://lidlit.app/support/
+- Price: free. Optional donations: https://lidlit.app/support/
 - Not affiliated with Apple.
 
 ## What it does
 
-- Modes: Glow (fixed brightness), Pulse (slow fade in and out, adjustable speed), Follow (tracks the screen brightness), Morse (rests dark and spells out messages), or off.
+- Glow: the logo stays lit at the brightness you choose, independent of the screen. Optional "Follow screen" makes it track the screen brightness like stock macOS.
+- Pulse: a slow fade in and out (Slow, Calm, Quick).
+- Off: one switch at the top keeps the logo dark.
 - Auto-dim: softer in a dark room, using the Mac's light sensor.
-- Notifications: blinks in a distinct rhythm when Claude Code or Codex (ChatGPT) finishes or needs input (installs their hooks with one switch), and for new email (Mail, Outlook, Spark and others) and chat messages (Slack, Teams, Messages, WhatsApp, Discord, Telegram), read from the unread badge on the app's Dock icon.
-- Morse code: pick the Morse mode, type a message and the lid spells it out; saved messages can be used as a notification's signal.
+- Alerts: blinks in a distinct rhythm when Claude Code or Codex (ChatGPT) finishes or needs input (installs their hooks with one switch), and for new email (Mail, Outlook, Spark and others) and chat messages (Slack, Teams, Messages, WhatsApp, Discord, Telegram), read from the unread badge on the app's Dock icon.
+- Morse: type a message and the lid spells it out at the slider's brightness; saved messages can be an alert's signal.
 - Schedule: different behaviour at different times of day.
-- Lid closed: can keep glowing, or only flash for notifications, while you use an external display.
-- Scripting: `lidlit cue <name>`, `lidlit level 0-100`, `lidlit mode steady|pulse|followScreen|morse|off`, and a `lidlit://` URL scheme for Shortcuts.
+- Lid closed (e.g. with an external display): keeps glowing, and brightness, Pulse and alerts still work; or only alerts flash.
+
+## For AI agents and scripts
+
+Lidlit can be driven from the command line on the user's Mac (installed at `~/.local/bin/lidlit` when the app first runs), so a coding agent can use the lid as a status light:
+
+- `lidlit cue claude-done` / `claude-input` / `chatgpt-done` / `chatgpt-input` / `mail` / `message` / `alert` — flash a signal, if that source is switched on in Lidlit's Alerts (`alert` is the Scripts source). Optionally add a pattern: doubleSwell, tripleBlink, heartbeat, longPulse, beacon, sos.
+- `lidlit morse "DONE"` — spell a message; `lidlit stop` ends it.
+- `lidlit level 0-100`, `lidlit on`, `lidlit off`, `lidlit pulse [seconds]`, `lidlit mode steady|pulse|followScreen|off`.
+- `lidlit status` — the logo's current LED duty.
+- URL scheme for Shortcuts: `lidlit://cue/mail`, `lidlit://level/40`, `lidlit://off`.
+- Example for Claude Code: a Stop hook running `lidlit cue claude-done` blinks the lid when Claude finishes (Lidlit's Alerts › Claude switch installs this for you).
 
 ## Common questions
 
