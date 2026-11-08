@@ -42,8 +42,9 @@ p { margin: 0; }
 nav { display: flex; align-items: center; gap: 10px; padding-block: 18px; }
 .mark { width: 28px; height: 28px; border-radius: 7px; position: relative; background: linear-gradient(#2c2c2f, #0b0b0c);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.1); }
-.mark::before { content: ""; position: absolute; left: 9px; right: 6px; bottom: 7px; height: 2.5px; border-radius: 2px; background: rgba(255,255,255,.22); }
-.mark::after { content: ""; position: absolute; left: 8px; top: 6px; bottom: 7px; width: 3.5px; border-radius: 2px; background: #fff; box-shadow: 0 0 6px rgba(255,255,255,.8); }
+.mark::before { content: ""; position: absolute; left: 8px; top: 6px; right: 6px; bottom: 7px;
+  border-left: 3px solid rgba(255,255,255,.22); border-bottom: 2.5px solid rgba(255,255,255,.22); border-bottom-left-radius: 2px; }
+.mark::after { content: ""; position: absolute; left: 7.5px; top: 10px; height: 7px; width: 4px; border-radius: 2px; background: #fff; box-shadow: 0 0 6px rgba(255,255,255,.85); }
 nav .name { font-weight: 600; font-size: 1.05rem; }
 nav .spacer { flex: 1; }
 .btn { display: inline-flex; align-items: center; gap: 8px; border: 0; border-radius: 999px; cursor: pointer;
@@ -57,7 +58,16 @@ nav .spacer { flex: 1; }
 .hero .sub { font-size: clamp(1.05rem, 2.2vw, 1.3rem); color: var(--ink-2); max-width: 34ch; }
 .hero .cta { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
 
-.film { width: min(860px, 100%); aspect-ratio: 16 / 10; margin-top: 30px; border-radius: 22px; background: #000; display: block; }
+.shot { width: min(330px, 100%); height: auto; display: block; justify-self: center; border-radius: 18px;
+  box-shadow: 0 0 0 1px var(--hair), 0 30px 80px -30px rgba(255,255,255,.12); }
+.hero-shot { margin-top: 34px; }
+.faq { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
+.faq details { border-top: 1px solid var(--hair); padding-block: 14px; }
+.faq summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; color: var(--ink-3); font-weight: 400; }
+.faq details[open] summary::after { content: "–"; }
+.faq details p { color: var(--ink-2); margin-top: 8px; font-size: .95rem; }
 
 /* Demos */
 section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hair); }
@@ -96,7 +106,7 @@ section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hai
 footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: flex; gap: 18px; flex-wrap: wrap;
   color: var(--ink-3); font-size: .85rem; }
 
-@media (max-width: 760px) { .demo { grid-template-columns: 1fr; } .demo .visual { order: -1; } }
+@media (max-width: 760px) { .demo { grid-template-columns: 1fr; } .demo .visual { order: -1; } .faq { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .glow { transition-duration: 0s !important; } }
 </style>
 </head>
@@ -114,38 +124,27 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
     <p class="sub">A quiet glow while you work. A blink when Claude is done.</p>
     <div class="cta">
       <a class="btn" href="#download">Download for Mac</a>
-      <a class="btn ghost" href="#modes">Try it</a>
+      <a class="btn ghost" href="#faq">FAQ</a>
     </div>
-    <video class="film" src="img/lidlight-demo.mp4" poster="img/lidlight-demo-poster.png"
-           autoplay muted loop playsinline preload="auto" aria-label="Lidlight on a MacBook Pro lid: steady, breathing, Claude finished, new email, Morse"></video>
+    <img class="shot hero-shot" src="img/app-main.png" width="330" alt="Lidlight in the menu bar: a live preview of the lid, Steady, Breathe and Follow, and a brightness slider">
   </div>
 
   <section id="modes">
     <div class="demo">
       <div class="text">
         <h2>Glow, breathe, or rest.</h2>
-        <p class="muted">One switch, one slider. Softer in a dark room.</p>
-        <div class="controls" role="group" aria-label="Mode">
-          <button class="chip" data-mode="steady" aria-pressed="false">Steady</button>
-          <button class="chip" data-mode="breathe" aria-pressed="true">Breathe</button>
-          <button class="chip" data-mode="off" aria-pressed="false">Off</button>
-        </div>
+        <p class="muted">One switch, one slider. Softer in a dark room. Keeps glowing with the lid closed.</p>
       </div>
-      <div class="visual"><div class="plate"><span class="glow">lid</span></div></div>
+      <div class="visual"><img class="shot" src="img/app-main.png" width="330" alt="Main panel with Steady selected"></div>
     </div>
   </section>
 
   <section>
     <div class="demo">
-      <div class="visual"><div class="plate"><span class="glow">lid</span></div></div>
+      <div class="visual"><img class="shot" src="img/app-notifications.png" width="330" alt="Notifications: Claude, ChatGPT, Email, Chat and Scripts, each on or off with its own rhythm"></div>
       <div class="text">
         <h2>Know at a glance.</h2>
-        <p class="muted">Every notification has its own rhythm. Tap one.</p>
-        <div class="signal-list">
-          <button class="signal" data-pattern="doubleSwell">Claude finished <span class="k">Double swell</span></button>
-          <button class="signal" data-pattern="heartbeat">New email <span class="k">Heartbeat</span></button>
-          <button class="signal" data-pattern="tripleBlink">Claude needs you <span class="k">Triple blink</span></button>
-        </div>
+        <p class="muted">Claude, ChatGPT, email and chat. Each gets its own rhythm.</p>
       </div>
     </div>
   </section>
@@ -154,14 +153,23 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
     <div class="demo">
       <div class="text">
         <h2>Or say it in Morse.</h2>
-        <p class="muted">Type, send, watch it spell out.</p>
-        <div class="morse-row">
-          <input id="morseIn" maxlength="16" value="HI" aria-label="Morse message" autocomplete="off" spellcheck="false">
-          <button class="btn small" id="morseSend">Send</button>
-        </div>
-        <div class="track" id="track" aria-hidden="true"></div>
+        <p class="muted">Type a message. The lid spells it out.</p>
       </div>
-      <div class="visual"><div class="plate"><span class="glow">lid</span></div></div>
+      <div class="visual"><img class="shot" src="img/app-morse-menu.png" width="330" alt="Morse menu with a message and its dots and dashes"></div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2 style="margin-bottom:22px">Questions</h2>
+    <div class="faq">
+      <details><summary>How much CPU does it use?</summary><p>None you can measure: 0.0 % at rest. While breathing, macOS does the fading itself (about 2 % in its own brightness service).</p></details>
+      <details><summary>Does it drain the battery?</summary><p>Lidlight itself barely does anything. The light uses a little power, like any LED, and less at lower brightness. Turn it off any time.</p></details>
+      <details><summary>Does it work with the lid closed?</summary><p>Yes. Turn on Keep the glow, or let only notifications flash.</p></details>
+      <details><summary>Which Macs?</summary><p>MacBook Pro XDR with a lit logo, macOS 14 or later.</p></details>
+      <details><summary>Can it change color?</summary><p>No. The logo has a single white light, so signals use rhythm instead.</p></details>
+      <details><summary>Does it read my email or messages?</summary><p>No. It only sees the unread count on an app's Dock icon, and only for apps you turn on. Nothing leaves your Mac.</p></details>
+      <details><summary>Can I undo it?</summary><p>Yes. Reset hands the light back to macOS, and quitting leaves it as it is.</p></details>
+      <details><summary>Why the security prompt on first launch?</summary><p>The app isn't notarized yet. Open System Settings › Privacy &amp; Security and click Open Anyway, once.</p></details>
     </div>
   </section>
 
@@ -182,82 +190,19 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
 </div>
 
 <script>
+// The headline's "lid" breathes like the real light: unlit grey → glowing white.
 (() => {
+  const el = document.querySelector('h1 .glow');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const words = () => document.querySelectorAll('.glow');
-  // Same rhythms as the app: [level 0..1, fade s, hold s]
-  const blink = (on, off) => [[1, .05, on], [0, .2, off]];
-  const rep = (a, n) => Array.from({ length: n }, () => a).flat();
-  const patterns = {
-    doubleSwell: [[1, .45, .3], [0, .45, .35], [1, .45, .3], [0, .45, .3]],
-    heartbeat: rep([...blink(.15, .15), ...blink(.15, .8)], 3),
-    tripleBlink: rep([...blink(.2, .2), ...blink(.2, .2), ...blink(.2, .7)], 2),
-  };
-  const morseTable = { A:'.-',B:'-...',C:'-.-.',D:'-..',E:'.',F:'..-.',G:'--.',H:'....',I:'..',J:'.---',K:'-.-',L:'.-..',M:'--',N:'-.',O:'---',P:'.--.',Q:'--.-',R:'.-.',S:'...',T:'-',U:'..-',V:'...-',W:'.--',X:'-..-',Y:'-.--',Z:'--..',
-    0:'-----',1:'.----',2:'..---',3:'...--',4:'....-',5:'.....',6:'-....',7:'--...',8:'---..',9:'----.' };
-
-  let mode = 'breathe', timers = [], breath = null;
-  const base = .85;
-
-  // level 0..1 → the word goes from unlit grey to glowing white.
   function set(level, fade) {
-    const e = Math.round(58 + 197 * Math.min(1, Math.sqrt(level / .35)));
-    words().forEach(el => {
-      el.style.transitionDuration = (reduce ? 0 : fade) + 's';
-      el.style.setProperty('--e', e);
-      el.style.setProperty('--g', level);
-    });
+    el.style.transitionDuration = (reduce ? 0 : fade) + 's';
+    el.style.setProperty('--e', Math.round(58 + 197 * Math.min(1, Math.sqrt(level / .35))));
+    el.style.setProperty('--g', level);
   }
-  function clear() { timers.forEach(clearTimeout); timers = []; clearInterval(breath); breath = null; }
-  function applyMode() {
-    clear();
-    if (mode === 'off') set(0, .6);
-    else if (mode === 'steady') set(base, .6);
-    else { let up = true; set(base, 2.2); breath = setInterval(() => { up = !up; set(up ? base : 0, 2.2); }, 2400); }
-  }
-  function play(steps, onStep) {
-    clear(); let t = 0;
-    steps.forEach(([lvl, fade, hold], i) => { timers.push(setTimeout(() => { set(lvl, fade); onStep && onStep(i); }, t * 1000)); t += fade + hold; });
-    timers.push(setTimeout(() => { onStep && onStep(-1); applyMode(); }, t * 1000 + 300));
-  }
-
-  document.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click', () => {
-    mode = b.dataset.mode;
-    document.querySelectorAll('[data-mode]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-    applyMode();
-  }));
-  document.querySelectorAll('[data-pattern]').forEach(b => b.addEventListener('click', () => {
-    document.querySelectorAll('[data-pattern]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-    play([[0, .1, .2], ...patterns[b.dataset.pattern]], i => { if (i < 0) b.setAttribute('aria-pressed', 'false'); });
-  }));
-
-  const input = document.getElementById('morseIn'), track = document.getElementById('track');
-  input.addEventListener('input', () => { input.value = input.value.toUpperCase(); drawTrack(); });
-  function drawTrack(cur = -1, sym = -1) {
-    track.innerHTML = '';
-    [...input.value.toUpperCase()].forEach((ch, ci) => {
-      if (ch === ' ') { const s = document.createElement('span'); s.style.width = '8px'; track.append(s); return; }
-      const code = morseTable[ch]; if (!code) return;
-      const L = document.createElement('div'); L.className = 'letter' + (ci === cur ? ' cur' : '');
-      L.innerHTML = `<span>${ch}</span><span class="syms">${[...code].map((c, si) =>
-        `<span class="sym ${c === '-' ? 'dash' : 'dot'} ${ci < cur || (ci === cur && si < sym) ? 'sent' : ''} ${ci === cur && si === sym ? 'lit' : ''}"></span>`).join('')}</span>`;
-      track.append(L);
-    });
-  }
-  document.getElementById('morseSend').addEventListener('click', () => {
-    const u = .25, steps = [[0, .1, .5]], marks = {};
-    [...input.value.toUpperCase()].forEach((ch, ci) => {
-      if (ch === ' ') { steps[steps.length - 1][2] += 4 * u; return; }
-      const code = morseTable[ch]; if (!code) return;
-      [...code].forEach((c, si) => { marks[steps.length] = [ci, si]; steps.push([1, .04, (c === '-' ? 3 * u : u) - .04], [0, .06, u - .06]); });
-      steps[steps.length - 1][2] += 2 * u;
-    });
-    play(steps, i => { if (i < 0) drawTrack(); else if (marks[i]) drawTrack(...marks[i]); });
-  });
-
-  drawTrack();
   set(0, 0);
-  setTimeout(applyMode, 400);
+  if (reduce) { set(.85, 0); return; }
+  let up = true;
+  setTimeout(() => { set(.85, 2.2); setInterval(() => { up = !up; set(up ? .85 : 0, 2.2); }, 2400); }, 400);
 })();
 </script>
 </body>
