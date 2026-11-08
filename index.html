@@ -316,9 +316,9 @@ section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hai
 /* Mode tiles (Glow, Pulse) and panel tiles (Alerts, Morse) */
 .lp-modes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
 /* A quiet invitation: a soft ring pulses around one tile a few times, until the first touch. */
-.lp-mode.invite { animation: lp-invite 2.4s ease-out 3; }
+.lp-mode.invite, .lp-ptile.invite { animation: lp-invite 2.2s ease-out 2; }
 @keyframes lp-invite { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,.28); } 70%, 100% { box-shadow: 0 0 0 9px rgba(255,255,255,0); } }
-@media (prefers-reduced-motion: reduce) { .lp-mode.invite { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .lp-mode.invite, .lp-ptile.invite { animation: none; } }
 .lp-mode { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 10px 0; border-radius: 12px;
   background: var(--c-card); box-shadow: inset 0 0 0 1px var(--c-hair); color: var(--c-ink2); font-size: 11px; transition: background .12s; }
 .lp-mode .ic { height: 20px; display: grid; place-items: center; color: var(--c-ink3); }
@@ -740,7 +740,7 @@ function renderLogo(level) {
   const MORSE = { A:'.-',B:'-...',C:'-.-.',D:'-..',E:'.',F:'..-.',G:'--.',H:'....',I:'..',J:'.---',K:'-.-',L:'.-..',M:'--',N:'-.',O:'---',P:'.--.',Q:'--.-',R:'.-.',S:'...',T:'-',U:'..-',V:'...-',W:'.--',X:'-..-',Y:'-.--',Z:'--..',
     0:'-----',1:'.----',2:'..---',3:'...--',4:'....-',5:'.....',6:'-....',7:'--...',8:'---..',9:'----.','.':'.-.-.-',',':'--..--','?':'..--..','!':'-.-.--','/':'-..-.','@':'.--.-.','-':'-....-',"'":'.----.','(':'-.--.',')':'-.--.-','&':'.-...',':':'---...','=':'-...-','+':'.-.-.','"':'.-..-.','Å':'.--.-','Ä':'.-.-','Ö':'---.' };
 
-  const S = { on: true, mode: 'steady', lastOn: 'steady', level: 60, breath: 5, auto: true, drawer: '',
+  const S = { on: true, mode: 'breathe', lastOn: 'breathe', level: 60, breath: 5, auto: true, drawer: '',
     live: { claude: true, email: true }, pattern: {}, cueMorse: {}, openCue: null, info: false, copied: false,
     cueLevel: 100, cuesClosed: true, login: true, rules: [], unit: .25, saved: [] };
   const patternFor = c => S.pattern[c] || CUES[c].p;
@@ -953,19 +953,22 @@ function renderLogo(level) {
     ssend: i => { mtext.value = S.saved[i]; morse(S.saved[i]); },
     sdel: i => { const t = S.saved[i]; S.saved.splice(i, 1); for (const c in S.cueMorse) if (S.cueMorse[c] === t) delete S.cueMorse[c]; },
   };
-  // Invite a first tap once the panel is in view: a soft ring on Pulse, three times, then never again.
+  // Invite a first tap once the panel is in view: a soft ring on Glow, then on Morse
+  // (two pulses each), then never again. Any touch on the panel stops it.
   (() => {
     let done = false;
     const stopInvite = () => { done = true; panel.querySelectorAll('.invite').forEach(el => el.classList.remove('invite')); };
     panel.addEventListener('pointerdown', stopInvite, { once: true });
+    const ring = (sel, next) => {
+      const t = panel.querySelector(sel);
+      if (done || !t) return;
+      t.classList.add('invite');
+      t.addEventListener('animationend', () => { t.classList.remove('invite'); if (!done) setTimeout(next, 500); }, { once: true });
+    };
     const io = new IntersectionObserver(es => {
       if (!es.some(e => e.isIntersecting)) return;
       io.disconnect();
-      setTimeout(() => {
-        if (done) return;
-        const t = panel.querySelector('.lp-mode[data-arg="breathe"]');
-        if (t) { t.classList.add('invite'); t.addEventListener('animationend', stopInvite, { once: true }); }
-      }, 1400);
+      setTimeout(() => ring('.lp-mode[data-arg="steady"]', () => ring('.lp-ptile[data-arg="morse"]', () => {})), 1400);
     }, { threshold: .6 });
     io.observe(panel);
   })();
