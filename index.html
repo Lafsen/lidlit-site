@@ -262,9 +262,7 @@ section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hai
 .sym.lit { opacity: 1; background: var(--ink); height: 6px; box-shadow: 0 0 6px rgba(255,255,255,.7); }
 
 
-/* Try-it panel: a working copy of the menu-bar panel (MenuView.swift), with Theme.swift's dark tokens. */
-.try { display: grid; justify-items: center; gap: 12px; margin-top: 34px; }
-.try .hint { color: var(--ink-3); font-size: .85rem; }
+/* The panel (lives in the hero scene, see hero.css): a working copy of the menu-bar panel (MenuView.swift), with Theme.swift's dark tokens. */
 .panel { --c-canvas: #1c1c1e; --c-card: #2c2c2e; --c-ink: #f5f5f7; --c-ink2: #aeaeb2; --c-ink3: #7c7c80;
   --c-hair: rgba(255,255,255,.10); --c-div: rgba(255,255,255,.15); --c-strong: #f5f5f7; --c-on-strong: #1d1d1f;
   --c-soft: #3a3a3c; --c-accent-line: #d1d1d6;
@@ -457,6 +455,8 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
 @media (max-width: 760px) { .demo { grid-template-columns: 1fr; } .demo .visual { order: -1; } .faq { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .glow { transition-duration: 0s !important; } }
 </style>
+<link rel="stylesheet" href="hero.css">
+<script src="hero.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -467,14 +467,32 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
     <a class="btn small" href="https://github.com/Lafsen/lidlit-site/releases/latest/download/Lidlit.dmg">Download</a>
   </nav>
 
-  <div class="hero">
+  <div class="hero has-stage">
     <h1>Your <span class="glow">lid</span>, lit.</h1>
     <p class="sub">A quiet glow while you work. A blink when Claude is done.</p>
     <div class="cta">
       <a class="btn" href="https://github.com/Lafsen/lidlit-site/releases/latest/download/Lidlit.dmg">Download for Mac</a>
       <a class="btn ghost" href="#faq">FAQ</a>
     </div>
-    <div class="try">
+    <script>document.documentElement.classList.add('hero-js')</script>
+    <div class="stage" id="stage">
+      <div class="scene" id="scene" aria-hidden="true">
+        <div class="spill" id="spill"></div>
+        <div class="rig" id="rig"></div>
+        <div class="scr" id="scr">
+          <div class="notch"></div>
+          <div class="mb">
+            <span class="it apple"></span><span class="it"><b>Finder</b></span><span class="it dim">File</span><span class="it dim">Edit</span><span class="it dim">View</span><span class="it dim">Go</span>
+            <span class="sp"></span>
+            <button class="it lidlit" id="mbicon" tabindex="-1" aria-label="Lidlit"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6.4 2.4V14.6H14.6" stroke-width="2.2" opacity=".4"/><path d="M5.9 5.9V11.1" stroke-width="3.2"/></svg></button>
+            <span class="it"><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".6" y=".6" width="21" height="10.8" rx="3.2" stroke="currentColor" stroke-opacity=".5" stroke-width="1.1"/><rect x="2.3" y="2.3" width="14.4" height="7.4" rx="1.7" fill="currentColor"/><path d="M23.2 4.2v3.6c.8-.3 1.2-1 1.2-1.8s-.4-1.5-1.2-1.8z" fill="currentColor" fill-opacity=".5"/></svg></span>
+            <span class="it"><svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.1c2.4 0 4.6.9 6.3 2.5l1.1-1.1A10.4 10.4 0 0 0 8 .5 10.4 10.4 0 0 0 .6 3.5l1.1 1.1A9 9 0 0 1 8 2.1zm0 3.2c1.5 0 2.9.6 4 1.6l1.1-1.1A7.4 7.4 0 0 0 8 3.7a7.4 7.4 0 0 0-5.1 2.1L4 6.9a5.7 5.7 0 0 1 4-1.6zm0 3.2c.7 0 1.3.3 1.8.7L8 11 6.2 9.2c.5-.4 1.1-.7 1.8-.7z"/></svg></span>
+            <span class="it"><svg width="15" height="13" viewBox="0 0 15 13" fill="none" stroke="currentColor" stroke-width="1.2"><rect x=".6" y=".6" width="13.8" height="5" rx="2.5"/><circle cx="11.9" cy="3.1" r="1.4" fill="currentColor" stroke="none"/><rect x=".6" y="7.4" width="13.8" height="5" rx="2.5"/><circle cx="3.1" cy="9.9" r="1.4" fill="currentColor" stroke="none"/></svg></span>
+            <span class="it clock" id="clock">Sun 9:41</span>
+          </div>
+        </div>
+      </div>
+      <div class="drop" id="drop">
       <div class="panel" id="panel" aria-label="Try Lidlit">
         <div class="lp-head">
           <span class="lp-glyph" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6.4 2.4V14.6H14.6" stroke-width="2.2" opacity=".4"/><path d="M5.9 5.9V11.1" stroke-width="3.2"/></svg></span>
@@ -540,8 +558,10 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
           <div class="lp-col8" id="saved" hidden></div>
         </div>
       </div>
-      <p class="hint">Try it. Tap a mode or drag the slider.</p>
+      </div>
+      <div class="cursor" id="cursor" aria-hidden="true"><svg width="20" height="26" viewBox="0 0 20 26"><path d="M2 2v18.6l4.6-4.4 3.1 7 3.2-1.4-3-6.9h6.4z" fill="#000" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
     </div>
+    <p class="stage-foot"><span>Try it. Tap a mode or drag the slider.</span><button class="replay" id="replay" type="button">Replay</button></p>
   </div>
 
   <section id="modes">
@@ -641,6 +661,8 @@ function renderLogo(level) {
   logo.querySelector('.light').style.opacity = x > 0 ? light.toFixed(3) : 0;
   const a = ((.15 + .75 * glow) * fill).toFixed(3);
   wrap.style.filter = x > 0 ? `drop-shadow(0 0 ${(1 + 5 * glow).toFixed(1)}px rgba(255,255,255,${a}))` : 'none';
+  // The hero's MacBook shows the same light on its lid (hero.js).
+  if (window.lidHero) window.lidHero(x, x > 0 ? light : 0, glow, fill);
 }
 </script>
 <script>
