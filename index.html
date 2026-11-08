@@ -631,9 +631,12 @@ function renderLogo(level) {
   // fill = how white the logo is, bloom = the tight glow that grows towards 100 %.
   const x = Math.min(1, Math.max(0, level)), duty = 85 * Math.pow(x, 1.9);
   const fill = Math.min(1, Math.sqrt(duty / 7)), bloom = Math.min(1, Math.sqrt(duty / 85));
-  logo.querySelector('.light').style.opacity = x > 0 ? (.15 + .85 * fill).toFixed(3) : 0;
-  const a = ((.25 + .6 * bloom) * fill).toFixed(3);
-  wrap.style.filter = x > 0 ? `drop-shadow(0 0 ${(1 + 4 * bloom).toFixed(1)}px rgba(255,255,255,${a}))` : 'none';
+  // Whiteness rises over the whole range and the glow mostly arrives in the top half,
+  // so 50 % and 100 % look clearly different.
+  const light = .15 + .85 * Math.pow(Math.min(1, duty / 85), .4), glow = bloom * bloom;
+  logo.querySelector('.light').style.opacity = x > 0 ? light.toFixed(3) : 0;
+  const a = ((.15 + .75 * glow) * fill).toFixed(3);
+  wrap.style.filter = x > 0 ? `drop-shadow(0 0 ${(1 + 5 * glow).toFixed(1)}px rgba(255,255,255,${a}))` : 'none';
 }
 </script>
 <script>
