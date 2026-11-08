@@ -222,7 +222,8 @@ nav .spacer { flex: 1; }
 .shot { width: min(330px, 100%); height: auto; display: block; justify-self: center; border-radius: 18px;
   box-shadow: 0 0 0 1px var(--hair), 0 30px 80px -30px rgba(255,255,255,.12); }
 .hero-shot { margin-top: 34px; }
-.faq { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
+.faq { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; align-items: start; }
+.faq .col { display: flex; flex-direction: column; }
 .faq details { border-top: 1px solid var(--hair); padding-block: 14px; }
 .faq summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
 .faq summary::-webkit-details-marker { display: none; }
@@ -261,54 +262,184 @@ section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hai
 .sym.lit { opacity: 1; background: var(--ink); height: 6px; box-shadow: 0 0 6px rgba(255,255,255,.7); }
 
 
-/* Try-it panel: a working copy of the menu-bar panel. */
+/* Try-it panel: a working copy of the menu-bar panel (MenuView.swift), with Theme.swift's dark tokens. */
 .try { display: grid; justify-items: center; gap: 12px; margin-top: 34px; }
 .try .hint { color: var(--ink-3); font-size: .85rem; }
-.panel { width: min(340px, 100%); text-align: left; background: #1c1c1e; border-radius: 22px; padding: 16px;
-  box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 30px 80px -30px rgba(255,255,255,.12); display: grid; gap: 14px;
-  font-size: 15px; -webkit-user-select: none; user-select: none; }
-.p-head { display: flex; align-items: center; gap: 12px; }
-.p-head img { width: 38px; height: 38px; border-radius: 50%; }
-.p-head .t { flex: 1; min-width: 0; }
-.p-head b { display: block; font-size: 1.15rem; font-weight: 700; line-height: 1.2; }
-.p-head .st { color: var(--ink-2); font-size: .9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.power { width: 50px; height: 30px; border-radius: 999px; border: 0; cursor: pointer; position: relative; background: #3a3a3c; transition: background .2s; flex: none; }
-.power::after { content: ""; position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: #8e8e93; transition: transform .2s, background .2s; }
-.power[aria-checked="true"] { background: #f5f5f7; }
-.power[aria-checked="true"]::after { transform: translateX(20px); background: #2c2c2e; }
-.lid { position: relative; height: 128px; border-radius: 14px; background: linear-gradient(#e6e6e9, #c9c9ce);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.5); display: grid; place-items: center; overflow: hidden; }
-.lid .logo { width: 30px; height: 38px; -webkit-mask: url(img/logo-mask.png) center / contain no-repeat; mask: url(img/logo-mask.png) center / contain no-repeat; background: #121212; }
-.lid .logo-wrap { filter: drop-shadow(0 0 0 transparent); }
-.lid .lbl { position: absolute; left: 12px; bottom: 9px; font-size: 10px; font-weight: 600; letter-spacing: .12em; color: #8a8a8f; }
-.modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.mode { border: 0; cursor: pointer; border-radius: 12px; padding: 10px 4px 8px; display: grid; justify-items: center; gap: 4px;
-  background: #2c2c2e; color: var(--ink-2); font: 500 .88rem var(--font); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
-.mode svg { width: 24px; height: 24px; }
-.mode[aria-pressed="true"] { background: #3a3a3c; color: var(--ink); font-weight: 600; box-shadow: none; }
-.p-slider { display: flex; align-items: center; gap: 10px; color: var(--ink-3); }
-.p-slider svg { width: 16px; height: 16px; flex: none; } .p-slider svg.big { width: 20px; height: 20px; }
-.p-slider input { flex: 1; min-width: 0; accent-color: #f5f5f7; }
-.p-row { display: flex; align-items: center; justify-content: flex-end; gap: 10px; color: var(--ink-2); font-size: .88rem; }
-.pill { border: 0; cursor: pointer; border-radius: 999px; padding: 3px 11px; font: 600 .78rem var(--font); background: transparent;
-  color: var(--ink-2); box-shadow: inset 0 0 0 1px rgba(255,255,255,.18); min-width: 44px; }
-.pill[aria-pressed="true"] { background: #f5f5f7; color: #000; box-shadow: none; }
-.tabs { display: flex; justify-content: space-between; padding-inline: 4px; }
-.tab { border: 0; background: none; cursor: pointer; color: var(--ink-2); font: 600 .95rem var(--font); display: flex; align-items: center; gap: 6px; padding: 4px 2px; }
-.tab svg { width: 15px; height: 15px; }
-.tab[aria-selected="true"] { color: var(--ink); }
-.drawer { display: grid; gap: 8px; }
-.drawer[hidden] { display: none; }
-.cue { display: flex; justify-content: space-between; align-items: center; gap: 10px; border: 0; cursor: pointer; text-align: left;
-  border-radius: 12px; padding: 10px 12px; background: #2c2c2e; color: var(--ink); font: 500 .9rem var(--font); }
-.cue .k { color: var(--ink-3); font-size: .8rem; }
-.cue.on { box-shadow: inset 0 0 0 1.5px var(--ink); }
-.drawer .morse-row { margin-top: 0; }
-.drawer .morse-row input { background: #2c2c2e; font-size: .9rem; }
-.drawer .track { margin-top: 0; min-height: 28px; gap: 8px; }
-.seg { display: flex; gap: 6px; }
-.seg .chip { flex: 1; }
-.p-k { color: var(--ink-3); font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.panel { --c-canvas: #1c1c1e; --c-card: #2c2c2e; --c-ink: #f5f5f7; --c-ink2: #aeaeb2; --c-ink3: #7c7c80;
+  --c-hair: rgba(255,255,255,.10); --c-div: rgba(255,255,255,.15); --c-strong: #f5f5f7; --c-on-strong: #1d1d1f;
+  --c-soft: #3a3a3c; --c-accent-line: #d1d1d6;
+  width: 330px; flex: none; text-align: left; background: var(--c-canvas); color: var(--c-ink);
+  border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 14px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 24px 60px -24px rgba(0,0,0,.9);
+  font: 400 13px/1.2 var(--font); -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+@media (max-width: 369px) { .panel { zoom: .88; } }
+:where(.panel) button { font: inherit; color: inherit; background: none; border: 0; padding: 0; margin: 0; cursor: pointer; text-align: inherit; }
+.panel [hidden] { display: none !important; }
+.lp-i { display: block; flex: none; fill: none; stroke: currentColor; stroke-width: var(--sw, 1.6); stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+.lp-i .f { fill: currentColor; stroke: none; }
+.lp-i text { fill: currentColor; stroke: none; font: 800 9.5px var(--font); letter-spacing: -.2px; }
+.lp-sp { flex: 1; min-width: 0; }
+
+/* Header */
+.lp-head { display: flex; align-items: center; gap: 10px; }
+.lp-glyph { width: 34px; height: 34px; border-radius: 50%; background: var(--c-hair); display: grid; place-items: center; flex: none; color: var(--c-ink); }
+.lp-t { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.lp-title { font-size: 17px; font-weight: 600; }
+.lp-status { font-size: 11.5px; color: var(--c-ink2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Switches (GlowSwitch 40×23 with a symbol in the knob, MiniSwitch 30×18) */
+.lp-switch { position: relative; width: 40px; height: 23px; border-radius: 999px; background: var(--c-hair); flex: none; transition: background .2s; }
+.lp-switch[aria-checked="true"] { background: var(--c-strong); }
+.lp-switch .k { position: absolute; top: 2px; left: 2px; width: 19px; height: 19px; border-radius: 50%; background: var(--c-card);
+  box-shadow: 0 1px 3px rgba(0,0,0,.18); display: grid; place-items: center; color: var(--c-ink3); transition: transform .28s cubic-bezier(.34,1.4,.5,1); }
+.lp-switch[aria-checked="true"] .k { transform: translateX(17px); color: var(--c-ink2); }
+.lp-switch .k > * { grid-area: 1 / 1; }
+.lp-switch[aria-checked="true"] .moon, .lp-switch[aria-checked="false"] .sun { visibility: hidden; }
+.lp-mini { position: relative; display: block; width: 30px; height: 18px; border-radius: 999px; background: var(--c-hair); flex: none; transition: background .2s; }
+.lp-mini::after { content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: var(--c-card);
+  box-shadow: 0 .5px 2px rgba(0,0,0,.15); transition: transform .25s cubic-bezier(.34,1.3,.5,1); }
+.lp-mini.on { background: var(--c-strong); }
+.lp-mini.on::after { transform: translateX(12px); }
+
+/* Lid preview */
+.lp-lid { position: relative; height: 96px; flex: none; border-radius: 14px; background: linear-gradient(rgb(227,230,232), rgb(199,201,207));
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); display: grid; place-items: center; overflow: hidden; }
+.lp-lbl { position: absolute; left: 10px; bottom: 10px; font-size: 9px; line-height: 1; font-weight: 600; letter-spacing: 1.2px; color: rgba(0,0,0,.35); }
+
+/* Mode tiles */
+.lp-modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.lp-mode { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 10px 0; border-radius: 12px;
+  background: var(--c-card); box-shadow: inset 0 0 0 1px var(--c-hair); color: var(--c-ink2); font-size: 11px; transition: background .12s; }
+.lp-mode .ic { height: 20px; display: grid; place-items: center; color: var(--c-ink3); }
+.lp-mode:hover { background: var(--c-hair); }
+.lp-mode[aria-pressed="true"] { background: var(--c-soft); box-shadow: none; color: var(--c-ink); font-weight: 600; }
+.lp-mode[aria-pressed="true"] .ic { color: var(--c-ink); }
+
+/* Brightness */
+.lp-bright { display: flex; flex-direction: column; gap: 10px; padding: 0 2px; }
+.lp-srow { display: flex; align-items: center; gap: 10px; color: var(--c-ink3); }
+.lp-slider { position: relative; flex: 1; min-width: 0; height: 20px; cursor: pointer; touch-action: none; --f: .5; }
+.lp-slider::before { content: ""; position: absolute; left: 0; right: 0; top: 7px; height: 6px; border-radius: 3px; background: var(--c-hair); }
+.lp-slider .fill { position: absolute; left: 0; top: 7px; height: 6px; border-radius: 3px; background: var(--c-strong); width: max(6px, calc(100% * var(--f))); }
+.lp-slider .knob { position: absolute; top: 1px; left: calc((100% - 18px) * var(--f)); width: 18px; height: 18px; border-radius: 50%; background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.15), inset 0 0 0 1px var(--c-hair); }
+.lp-slider:focus-visible { outline: none; } .lp-slider:focus-visible .knob { outline: 2px solid var(--c-ink); outline-offset: 2px; }
+.lp-arow { display: flex; align-items: flex-start; gap: 8px; }
+.lp-speed { display: flex; flex-direction: column; gap: 6px; }
+.lp-speed > span { font-size: 10.5px; color: var(--c-ink3); }
+.lp-speed > div { display: flex; gap: 5px; }
+.lp-auto { display: flex; align-items: center; gap: 7px; font-size: 10.5px; color: var(--c-ink3); }
+.lp-auto.low { padding-top: 21px; }
+
+/* Pills */
+.lp-pill { display: inline-flex; align-items: center; gap: 5px; padding: 6px 11px; border-radius: 999px; font-size: 12px; font-weight: 600;
+  color: var(--c-ink); box-shadow: inset 0 0 0 1px var(--c-hair); white-space: nowrap; flex: none; transition: background .12s; }
+.lp-pill:hover { background: var(--c-hair); }
+.lp-pill.on { background: var(--c-soft); box-shadow: none; }
+.lp-pill.pro { background: var(--c-strong); color: var(--c-on-strong); box-shadow: none; }
+.lp-pill.pro:hover { background: var(--c-accent-line); }
+.lp-pill.light { padding: 4px 10px; font-size: 11.5px; font-weight: 400; }
+
+/* Menu bar: Settings · Notifications · Morse */
+.lp-bar { display: flex; align-items: center; gap: 4px; }
+.lp-tab { display: inline-flex; align-items: center; gap: 5px; padding: 6px 10px; border-radius: 999px; font-size: 12px; font-weight: 600;
+  color: var(--c-ink2); white-space: nowrap; flex: none; }
+.lp-tab[aria-selected="true"] { color: var(--c-ink); background: var(--c-hair); }
+
+/* Menus */
+.lp-card { display: flex; flex-direction: column; gap: 14px; padding: 14px; border-radius: 14px; background: var(--c-card); box-shadow: inset 0 0 0 1px var(--c-hair);
+  animation: lp-in .22s ease-out; }
+@keyframes lp-in { from { opacity: 0; transform: translateY(-6px); } }
+@media (prefers-reduced-motion: reduce) { .lp-card { animation: none; } }
+.lp-notifs { gap: 12px; }
+.lp-label { font-size: 10px; font-weight: 600; letter-spacing: 1.1px; text-transform: uppercase; color: var(--c-ink3); }
+.lp-div { height: 1px; flex: none; background: var(--c-div); }
+.lp-col { display: flex; flex-direction: column; gap: 10px; }
+.lp-col8 { display: flex; flex-direction: column; gap: 8px; }
+.lp-row { display: flex; align-items: center; gap: 10px; }
+.lp-row6 { display: flex; align-items: center; gap: 6px; }
+.lp-b { font-size: 12.5px; font-weight: 600; white-space: nowrap; }
+.lp-ic18 { width: 18px; display: grid; place-items: center; color: var(--c-ink2); flex: none; }
+.lp-onoff { font-size: 10.5px; font-weight: 600; padding: 2.5px 8px; border-radius: 999px; color: var(--c-ink3);
+  box-shadow: inset 0 0 0 1px var(--c-hair); flex: none; }
+.lp-onoff.on { background: var(--c-strong); color: var(--c-on-strong); box-shadow: none; }
+.lp-support { align-self: center; display: inline-flex; align-items: center; gap: 6px; font-size: 10.5px; color: var(--c-ink3); text-decoration: none; }
+.lp-support:hover { color: var(--c-ink2); }
+
+/* Schedule windows */
+.lp-rule { display: flex; flex-direction: column; gap: 8px; padding: 10px; border-radius: 12px; background: var(--c-canvas); box-shadow: inset 0 0 0 1px var(--c-hair); }
+.lp-rule.off { opacity: .6; }
+.lp-time { font: 400 12px var(--font); color: var(--c-ink); background: rgba(255,255,255,.06); border: 0; border-radius: 5px; padding: 2px 4px; color-scheme: dark; width: 54px; }
+.lp-time::-webkit-calendar-picker-indicator { display: none; }
+.lp-dash { color: var(--c-ink3); }
+.lp-trash { color: var(--c-ink3); }
+.lp-ichip { width: 26px; height: 24px; border-radius: 7px; display: grid; place-items: center; color: var(--c-ink3); box-shadow: inset 0 0 0 1px var(--c-hair); flex: none; }
+.lp-ichip.on { background: var(--c-soft); color: var(--c-ink); box-shadow: none; }
+
+/* Notifications */
+.lp-srcs { position: relative; display: flex; flex-direction: column; }
+.lp-src { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 9px 0; }
+.lp-src + .lp-src { border-top: 1px solid var(--c-div); }
+.lp-src.dim { opacity: .75; }
+.lp-src .top { display: flex; align-items: flex-start; gap: 8px; }
+.lp-src .name { display: flex; align-items: center; gap: 8px; height: 22px; }
+.lp-src .t { font-size: 12.5px; font-weight: 600; color: var(--c-ink2); white-space: nowrap; }
+.lp-src.live .t { color: var(--c-ink); }
+.lp-srcicon { width: 20px; height: 20px; display: grid; place-items: center; color: var(--c-ink2); flex: none; }
+.lp-info { color: var(--c-ink3); }
+.lp-cues { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; margin-left: auto; }
+.lp-cue { display: flex; align-items: center; gap: 6px; height: 22px; }
+.lp-cue .kind { width: 14px; display: grid; place-items: center; color: var(--c-ink3); }
+.lp-sig { width: 34px; height: 22px; border-radius: 999px; display: grid; place-items: center; color: var(--c-ink2); box-shadow: inset 0 0 0 1px var(--c-hair); }
+.lp-sig.open { background: var(--c-soft); box-shadow: none; }
+.lp-play { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: var(--c-soft); color: var(--c-ink2); }
+.lp-pats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding-top: 2px; }
+.lp-pat { display: flex; align-items: center; justify-content: center; gap: 5px; padding: 6px 2px; border-radius: 8px; background: var(--c-canvas);
+  color: var(--c-ink2); font-size: 10.5px; white-space: nowrap; overflow: hidden; }
+.lp-pat.on { background: var(--c-soft); color: var(--c-ink); }
+.lp-flow { display: flex; flex-wrap: wrap; gap: 6px; }
+.lp-mchip { display: inline-flex; align-items: center; gap: 5px; padding: 4px 8px; border-radius: 999px; background: var(--c-canvas);
+  color: var(--c-ink2); font-size: 10.5px; }
+.lp-mchip.on { background: var(--c-soft); color: var(--c-ink); }
+.lp-flash { display: flex; align-items: center; gap: 10px; }
+.lp-flash > span { font-size: 12px; color: var(--c-ink2); }
+.lp-flash .lp-ic18 { color: var(--c-ink3); }
+.lp-pop { position: absolute; z-index: 5; top: calc(100% - 6px); left: 0; width: 250px; padding: 12px; border-radius: 10px; background: #323234;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 10px 30px rgba(0,0,0,.5); display: flex; flex-direction: column; gap: 8px; -webkit-user-select: text; user-select: text; }
+.lp-pop p { font-size: 12px; line-height: 1.3; color: var(--c-ink); }
+.lp-pop code { font: 11.5px var(--mono); color: var(--c-ink); background: var(--c-canvas); padding: 4px 8px; border-radius: 6px; }
+.lp-pop .copy { font-size: 11px; font-weight: 600; color: var(--c-ink2); }
+.lp-pop small { font-size: 11px; color: var(--c-ink3); }
+
+/* Morse */
+.lp-minput { flex: 1; min-width: 0; font: 400 12.5px var(--font); color: var(--c-ink); background: var(--c-canvas); border: 0; border-radius: 10px;
+  padding: 6px 10px; box-shadow: inset 0 0 0 1px var(--c-hair); outline: none; text-transform: uppercase; -webkit-user-select: text; user-select: text; }
+.lp-minput::placeholder { color: var(--c-ink3); }
+.lp-minput:focus-visible { box-shadow: inset 0 0 0 1px var(--c-ink3); }
+.lp-mtrack { display: flex; flex-wrap: wrap; gap: 7px; }
+.lp-letter { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 2px 3px; border-radius: 6px; font-size: 11px; color: var(--c-ink2); }
+.lp-letter.cur { background: var(--c-soft); color: var(--c-ink); font-size: 11.5px; font-weight: 600; }
+.lp-letter.up { color: var(--c-ink3); }
+.lp-syms { display: flex; align-items: center; gap: 2.5px; height: 6px; }
+.lp-sym { width: 5px; height: 4px; border-radius: 2px; background: var(--c-ink3); }
+.lp-sym.dash { width: 12px; }
+.lp-letter.up .lp-sym { opacity: .5; }
+.lp-sym.sent { background: var(--c-ink2); }
+.lp-sym.lit { background: var(--c-ink); height: 6px; box-shadow: 0 0 3px var(--c-accent-line); }
+.lp-mspace { width: 6px; }
+.lp-schip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--c-hair); font-size: 11.5px; font-weight: 600; }
+.lp-schip.on { background: var(--c-soft); box-shadow: none; }
+.lp-schip button { display: inline-flex; align-items: center; gap: 5px; }
+.lp-schip .x { color: var(--c-ink3); }
+.lp-note { font-size: 11px; line-height: 1.3; color: var(--c-ink3); }
+
+/* Lid logo: drawn only by renderLogo() (script below). */
+/* Like the real lid: a polished mirror insert with a thin chamfer; light fills it from behind. */
+.lp-logo { position: relative; width: 30px; height: 36px; }
+.lp-logo i { position: absolute; inset: 0; -webkit-mask: url(img/logo-mask.png) center / contain no-repeat; mask: url(img/logo-mask.png) center / contain no-repeat; }
+.lp-logo .edge { inset: -.8px; background: rgba(0,0,0,.28); filter: blur(.35px); }
+.lp-logo .mirror { background: linear-gradient(#858585, #b3b3b3); }
+.lp-logo .light { background: #fff; opacity: 0; }
 
 /* Download */
 .download { text-align: center; display: grid; justify-items: center; gap: 14px; }
@@ -339,41 +470,71 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
     </div>
     <div class="try">
       <div class="panel" id="panel" aria-label="Try Lidlit">
-        <div class="p-head">
-          <img src="img/icon.png" alt="">
-          <div class="t"><b>Lidlit</b><div class="st" id="st" aria-live="polite">Glowing at 60%</div></div>
-          <button class="power" id="power" role="switch" aria-checked="true" aria-label="Light on"></button>
+        <div class="lp-head">
+          <span class="lp-glyph" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6.4 2.4V14.6H14.6" stroke-width="2.2" opacity=".4"/><path d="M5.9 5.9V11.1" stroke-width="3.2"/></svg></span>
+          <div class="lp-t"><div class="lp-title">Lidlit</div><div class="lp-status" id="st" aria-live="polite">Glowing at 60%</div></div>
+          <button class="lp-switch" id="power" data-act="power" role="switch" aria-checked="true" aria-label="Light"><span class="k"><i class="sun" data-i="sun.max.fill" data-s="11" data-w="bold"></i><i class="moon" data-i="moon.fill" data-s="10" data-w="bold"></i></span></button>
         </div>
-        <div class="lid"><div class="logo-wrap" id="glowf"><div class="logo" id="logo"></div></div><span class="lbl" id="lbl">STEADY</span></div>
-        <div class="modes">
-          <button class="mode" data-mode="steady" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.5 1.5M17.2 17.2l1.5 1.5M5.3 18.7l1.5-1.5M17.2 6.8l1.5-1.5"/></svg>Steady</button>
-          <button class="mode" data-mode="breathe" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 9h11a3 3 0 1 0-3-3M3 13h15a3 3 0 1 1-3 3M3 17h7"/></svg>Breathe</button>
-          <button class="mode" data-mode="follow" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12.5" rx="1.8"/><path d="M9 20.5h6M12 16.5v4"/></svg>Follow</button>
+        <div class="lp-lid"><div class="lp-logo-wrap" id="glowf"><div class="lp-logo" id="logo"></div></div><span class="lp-lbl" id="lbl">STEADY</span></div>
+        <div class="lp-modes">
+          <button class="lp-mode" data-act="mode" data-arg="steady" aria-pressed="true"><span class="ic"><i data-i="sun.max.fill" data-s="19"></i></span>Steady</button>
+          <button class="lp-mode" data-act="mode" data-arg="breathe" aria-pressed="false"><span class="ic"><i data-i="wind" data-s="19"></i></span>Breathe</button>
+          <button class="lp-mode" data-act="mode" data-arg="follow" aria-pressed="false"><span class="ic"><i data-i="display" data-s="19"></i></span>Follow</button>
         </div>
-        <label class="p-slider"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3.6"/><path d="M12 3.5v2M12 18.5v2M3.5 12h2M18.5 12h2M6 6l1.4 1.4M16.6 16.6L18 18M6 18l1.4-1.4M16.6 7.4L18 6"/></svg><input id="lvl" type="range" min="1" max="100" value="60" aria-label="Brightness"><span class="big"><svg class="big" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3.6"/><path d="M12 3.5v2M12 18.5v2M3.5 12h2M18.5 12h2M6 6l1.4 1.4M16.6 16.6L18 18M6 18l1.4-1.4M16.6 7.4L18 6"/></svg></span></label>
-        <div class="p-row">Auto-dim <button class="pill" id="auto" aria-pressed="true">On</button></div>
-        <div class="tabs" role="tablist">
-          <button class="tab" role="tab" data-tab="settings" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/><circle cx="9" cy="7" r="2" fill="#1c1c1e"/><circle cx="15" cy="12" r="2" fill="#1c1c1e"/><circle cx="8" cy="17" r="2" fill="#1c1c1e"/></svg>Settings</button>
-          <button class="tab" role="tab" data-tab="notifs" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg>Notifications</button>
-          <button class="tab" role="tab" data-tab="morse" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="6" cy="12" r="1.4" fill="currentColor"/><path d="M10 8.5a5 5 0 0 1 0 7M13.5 6a8.5 8.5 0 0 1 0 12M17 3.5a12 12 0 0 1 0 17"/></svg>Morse</button>
+        <div class="lp-bright" id="bright">
+          <div class="lp-srow"><i data-i="sun.min" data-s="14"></i><div class="lp-slider" id="lvl" role="slider" tabindex="0" aria-label="Brightness"></div><i data-i="sun.max" data-s="16"></i></div>
+          <div class="lp-arow">
+            <div class="lp-speed" id="speed" hidden><span>Speed</span><div>
+              <button class="lp-pill light" data-act="speed" data-arg="7">Slow</button><button class="lp-pill light" data-act="speed" data-arg="4.5">Calm</button><button class="lp-pill light" data-act="speed" data-arg="2.5">Quick</button>
+            </div></div>
+            <span class="lp-sp"></span>
+            <button class="lp-auto" id="auto" data-act="auto" role="switch" aria-checked="true" title="Dims the logo in a dark room">Auto-dim <span class="lp-mini on"></span></button>
+          </div>
         </div>
-        <div class="drawer" id="d-settings" hidden>
-          <span class="p-k">Breathing speed</span>
-          <div class="seg"><button class="chip" data-speed="7">Slow</button><button class="chip" data-speed="4.4" aria-pressed="true">Normal</button><button class="chip" data-speed="2.6">Fast</button></div>
+        <div class="lp-bar" role="tablist">
+          <button class="lp-tab" role="tab" data-act="tab" data-arg="settings" aria-selected="false"><i data-i="slider.horizontal.3" data-s="13" data-w="semibold"></i>Settings</button>
+          <span class="lp-sp"></span>
+          <button class="lp-tab" role="tab" data-act="tab" data-arg="notifications" aria-selected="true"><span id="bellic"></span>Notifications</button>
+          <span class="lp-sp"></span>
+          <button class="lp-tab" role="tab" data-act="tab" data-arg="morse" aria-selected="false"><i data-i="dot.radiowaves.right" data-s="13" data-w="semibold"></i>Morse</button>
         </div>
-        <div class="drawer" id="d-notifs">
-          <button class="cue" data-cue="doubleSwell">Claude finished <span class="k">Double swell</span></button>
-          <button class="cue" data-cue="tripleBlink">Claude needs you <span class="k">Triple blink</span></button>
-          <button class="cue" data-cue="longPulse">ChatGPT finished <span class="k">Long pulse</span></button>
-          <button class="cue" data-cue="heartbeat">New email <span class="k">Heartbeat</span></button>
-          <button class="cue" data-cue="beacon">New chat message <span class="k">Beacon</span></button>
+        <div class="lp-card" id="d-settings" hidden>
+          <div class="lp-col8">
+            <div class="lp-row"><span class="lp-label">Schedule</span><span class="lp-sp"></span><button class="lp-pill" data-act="add"><i data-i="plus" data-s="13" data-w="semibold"></i>Add</button></div>
+            <div class="lp-col8" id="rules" hidden></div>
+          </div>
+          <div class="lp-div"></div>
+          <div class="lp-col">
+            <span class="lp-label">Lid closed</span>
+            <div class="lp-row"><span class="lp-ic18"><i data-i="laptopcomputer" data-s="17"></i></span><span class="lp-b">Keep the glow</span><button class="lp-onoff" id="keep" data-act="keep">Off</button></div>
+          </div>
+          <div class="lp-div"></div>
+          <div class="lp-row6">
+            <button class="lp-pill on" id="login" data-act="login"></button>
+            <span class="lp-sp"></span>
+            <button class="lp-pill" data-act="reset" title="Hand the logo back to macOS"><i data-i="arrow.counterclockwise" data-s="13" data-w="semibold"></i>Reset</button>
+            <button class="lp-pill" data-act="quit" title="The logo keeps its current look after quitting"><i data-i="xmark" data-s="13" data-w="semibold"></i>Quit</button>
+          </div>
+          <a class="lp-support" href="/support/" title="Lidlit is free. If you like it, you can chip in."><i data-i="heart" data-s="12"></i>Support Lidlit</a>
         </div>
-        <div class="drawer" id="d-morse" hidden>
-          <form class="morse-row" id="mform"><input id="mtext" maxlength="16" value="HELLO" aria-label="Message" autocomplete="off" spellcheck="false"><button class="btn small">Send</button></form>
-          <div class="track" id="mtrack"></div>
+        <div class="lp-card lp-notifs" id="d-notifications">
+          <div class="lp-srcs" id="srcs"></div>
+          <div class="lp-div"></div>
+          <div class="lp-flash"><span class="lp-ic18"><i data-i="sun.max" data-s="14"></i></span><span>Flash</span><div class="lp-slider" id="flash" role="slider" tabindex="0" aria-label="Flash brightness"></div></div>
+          <button class="lp-row" data-act="closedcues" role="switch" aria-checked="true"><span class="lp-ic18"><i data-i="laptopcomputer" data-s="17"></i></span><span class="lp-b">Show with the lid closed</span><span class="lp-sp"></span><span class="lp-mini on" id="closedcues"></span></button>
+        </div>
+        <div class="lp-card" id="d-morse" hidden>
+          <div class="lp-col8">
+            <span class="lp-label">Morse message</span>
+            <form class="lp-row6" id="mform"><input class="lp-minput" id="mtext" maxlength="24" value="HELLO" placeholder="TYPE A MESSAGE" aria-label="Message" autocomplete="off" autocapitalize="characters" spellcheck="false"><span id="msend"></span></form>
+            <div class="lp-mtrack" id="mtrack"></div>
+            <div class="lp-row6" id="mspeeds"></div>
+          </div>
+          <div class="lp-div" id="saved-div" hidden></div>
+          <div class="lp-col8" id="saved" hidden></div>
         </div>
       </div>
-      <p class="hint">Try it. Tap a notification to see the lid flash.</p>
+      <p class="hint">Try it. Press play on a notification.</p>
     </div>
   </div>
 
@@ -459,126 +620,355 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
 </script>
 
 <script>
-// The try-it panel: same modes, rhythms and Morse timing as the app, drawn on a lid.
+// Lid logo: the ONLY place that draws the preview's Apple logo (markup: #glowf > #logo, CSS: .lp-logo*).
+// level: 0 = dark … 1 = full brightness.
+function renderLogo(level) {
+  const logo = document.getElementById('logo'), wrap = document.getElementById('glowf');
+  if (!logo.firstChild) logo.innerHTML = '<i class="edge"></i><i class="mirror"></i><i class="light"></i>';
+  // Same as the app: slider level → LED duty (≈7 % duty at 26 %), then
+  // fill = how white the logo is, bloom = the tight glow that grows towards 100 %.
+  const x = Math.min(1, Math.max(0, level)), duty = 85 * Math.pow(x, 1.9);
+  const fill = Math.min(1, Math.sqrt(duty / 7)), bloom = Math.min(1, Math.sqrt(duty / 85));
+  logo.querySelector('.light').style.opacity = x > 0 ? (.15 + .85 * fill).toFixed(3) : 0;
+  const a = ((.25 + .6 * bloom) * fill).toFixed(3);
+  wrap.style.filter = x > 0 ? `drop-shadow(0 0 ${(1 + 4 * bloom).toFixed(1)}px rgba(255,255,255,${a}))` : 'none';
+}
+</script>
+<script>
+// The try-it panel: a working copy of MenuView.swift — same controls, rhythms and Morse timing as the app.
 (() => {
   const $ = id => document.getElementById(id);
-  const logo = $('logo'), glowf = $('glowf'), st = $('st'), lbl = $('lbl'), lvl = $('lvl'), power = $('power');
-  const S = { on: true, mode: 'steady', level: 60, period: 4.4, auto: true };
-  let shown = 0.6, seq = null, seqName = '', t0 = 0, onDone = null;
+  const panel = $('panel');
+  const esc = s => String(s).replace(/[&<>"']/g, c => `&#${c.charCodeAt(0)};`);
 
+  // ---- SF Symbols, redrawn as SVG (24×24 grid). Stroke width follows the symbol weight.
+  const rays = (r1, r2) => Array.from({ length: 8 }, (_, i) => {
+    const a = i * Math.PI / 4, c = Math.cos(a), s = Math.sin(a), p = v => v.toFixed(2);
+    return `M${p(12 + r1 * c)} ${p(12 + r1 * s)}L${p(12 + r2 * c)} ${p(12 + r2 * s)}`;
+  }).join('');
+  const bell = 'M6 16.6V11a6 6 0 0 1 12 0v5.6l1.7 2.1H4.3z';
+  const ICONS = {
+    'sun.max': `<circle cx="12" cy="12" r="4.2"/><path d="${rays(7, 9.8)}"/>`,
+    'sun.max.fill': `<circle class="f" cx="12" cy="12" r="4.9"/><path d="${rays(7.6, 10.3)}"/>`,
+    'sun.min': `<circle cx="12" cy="12" r="3.7"/><path d="${rays(6.6, 7.6)}"/>`,
+    'moon.fill': '<path class="f" d="M19.8 14.6A8.3 8.3 0 0 1 9.4 4.2a8.3 8.3 0 1 0 10.4 10.4z"/>',
+    'moon.zzz.fill': '<path class="f" d="M16.8 16.4A7 7 0 0 1 8 7.6a7 7 0 1 0 8.8 8.8z"/><path d="M13.5 3.5h3l-3 3.5h3M18 8.5h2.5L18 11.5h2.5"/>',
+    'wind': '<path d="M2.8 8.2h9.7a2.6 2.6 0 1 0-2.6-2.6M2.8 12.2h15.4a2.8 2.8 0 1 0-2.8-2.8M2.8 16.2h10.4a2.6 2.6 0 1 1-2.6 2.6"/>',
+    'display': '<rect class="f" x="4.2" y="5.2" width="15.6" height="9.9" rx=".6" opacity=".45"/><rect x="3" y="4" width="18" height="12.3" rx="2"/><path d="M12 16.3v3.2M8.5 20h7"/>',
+    'slider.horizontal.3': '<path d="M3 6h10.2M17.8 6H21M3 12h3.2M10.8 12H21M3 18h7.2M14.8 18H21"/><circle cx="15.5" cy="6" r="2.3"/><circle cx="8.5" cy="12" r="2.3"/><circle cx="12.5" cy="18" r="2.3"/>',
+    'bell': `<path d="${bell}"/><path d="M10 20.8a2 2 0 0 0 4 0"/>`,
+    'bell.slash': `<path d="${bell}"/><path d="M10 20.8a2 2 0 0 0 4 0M4 3.5l16 17"/>`,
+    'bell.slash.fill': `<path class="f" d="${bell}"/><path d="M10 20.8a2 2 0 0 0 4 0M4 3.5l16 17"/>`,
+    'dot.radiowaves.right': '<circle class="f" cx="6.5" cy="12" r="1.7"/><path d="M10.4 8.4a5.2 5.2 0 0 1 0 7.2M14 5.3a9.6 9.6 0 0 1 0 13.4"/>',
+    'plus': '<path d="M12 4.5v15M4.5 12h15"/>',
+    'laptopcomputer': '<rect x="4.5" y="5" width="15" height="10.5" rx="1.3"/><path d="M1.8 18.7h20.4"/>',
+    'checkmark': '<path d="M4.5 12.8l4.6 4.7L19.5 6.5"/>',
+    'power': '<path d="M12 3.5v8M7.2 6.4a7.3 7.3 0 1 0 9.6 0"/>',
+    'arrow.counterclockwise': '<path d="M11 4.8a7.4 7.4 0 1 1-7.3 8.6"/><path d="M13.3 2.3L10.8 4.8l2.5 2.5"/>',
+    'xmark': '<path d="M6 6l12 12M18 6L6 18"/>',
+    'heart': '<path d="M12 20s-8-4.7-8-10.5A4.4 4.4 0 0 1 12 7a4.4 4.4 0 0 1 8 2.5C20 15.3 12 20 12 20z"/>',
+    'heart.fill': '<path class="f" d="M12 20.5s-8.5-5-8.5-11.1A4.7 4.7 0 0 1 12 6.6a4.7 4.7 0 0 1 8.5 2.8c0 6.1-8.5 11.1-8.5 11.1z"/>',
+    'sparkles': '<path class="f" d="M10 4c.6 4 2.5 5.9 6.5 6.5-4 .6-5.9 2.5-6.5 6.5-.6-4-2.5-5.9-6.5-6.5C7.5 9.9 9.4 8 10 4zM18 14c.3 2 1.2 2.9 3.2 3.2-2 .3-2.9 1.2-3.2 3.2-.3-2-1.2-2.9-3.2-3.2 2-.3 2.9-1.2 3.2-3.2zM17.5 2.5c.2 1.3.8 1.9 2.1 2.1-1.3.2-1.9.8-2.1 2.1-.2-1.3-.8-1.9-2.1-2.1 1.3-.2 1.9-.8 2.1-2.1z"/>',
+    'bubble.left.and.text.bubble.right': '<path d="M9.5 3.5h9a2.5 2.5 0 0 1 2.5 2.5v5a2.5 2.5 0 0 1-2.5 2.5H18v2.5L15 13.5"/><path d="M3 10.5A2.5 2.5 0 0 1 5.5 8h8a2.5 2.5 0 0 1 2.5 2.5v5a2.5 2.5 0 0 1-2.5 2.5H9l-3.5 3v-3A2.5 2.5 0 0 1 3 15.5z"/><path d="M6.5 11.8h6M6.5 14.6h4"/>',
+    'envelope.fill': '<rect class="f" x="2.5" y="5" width="19" height="14" rx="2.2"/><path d="M3.5 6.5L12 13l8.5-6.5M3.5 18l6.3-6.2M20.5 18l-6.3-6.2" stroke="var(--c-card)" stroke-width="1.4"/>',
+    'bubble.left.fill': '<path class="f" d="M6 3.5h12A3.5 3.5 0 0 1 21.5 7v7a3.5 3.5 0 0 1-3.5 3.5h-7.5l-5 4v-4.1A3.5 3.5 0 0 1 2.5 14V7A3.5 3.5 0 0 1 6 3.5z"/>',
+    'terminal': '<rect x="2.5" y="4" width="19" height="16" rx="2.6"/><path d="M6.5 8.8l3 2.6-3 2.6M11.5 14.5h4.5"/>',
+    'info.circle': '<circle cx="12" cy="12" r="9"/><circle class="f" cx="12" cy="7.9" r="1.2"/><path d="M10.4 11h1.6v6M10.2 17h3.6"/>',
+    'hand.raised': '<path d="M8 12.5V6.3a1.3 1.3 0 0 1 2.6 0v5.2M10.6 11.5V4.8a1.3 1.3 0 0 1 2.6 0v6.7M13.2 11.5V6a1.3 1.3 0 0 1 2.6 0v6.2M15.8 12.2V8.6a1.3 1.3 0 0 1 2.6 0v6c0 3.6-2.5 6.2-6 6.2-2.3 0-3.8-1-5-2.8l-2.9-4.4a1.4 1.4 0 0 1 2.2-1.6L8 13.9"/>',
+    'play.fill': '<path class="f" d="M7 4.6c0-.9 1-1.4 1.7-.9l10.6 7.4c.6.4.6 1.4 0 1.8L8.7 20.3c-.7.5-1.7 0-1.7-.9z"/>',
+    'light.max': `<path class="f" d="M7.5 18a4.5 4.5 0 0 1 9 0z"/><path d="M4.5 18h15M12 6.5V9.5M5.7 9.2l2 2M18.3 9.2l-2 2M2.5 14.5h2.7M18.8 14.5h2.7"/>`,
+    'water.waves': '<path d="M2.5 7.5c1.6-1.3 3.2-1.3 4.8 0s3.2 1.3 4.7 0 3.2-1.3 4.7 0 3.2 1.3 4.8 0M2.5 12c1.6-1.3 3.2-1.3 4.8 0s3.2 1.3 4.7 0 3.2-1.3 4.7 0 3.2 1.3 4.8 0M2.5 16.5c1.6-1.3 3.2-1.3 4.8 0s3.2 1.3 4.7 0 3.2-1.3 4.7 0 3.2 1.3 4.8 0"/>',
+    'ellipsis': '<circle class="f" cx="5" cy="12" r="1.9"/><circle class="f" cx="12" cy="12" r="1.9"/><circle class="f" cx="19" cy="12" r="1.9"/>',
+    'circle.dashed': '<circle cx="12" cy="12" r="8.5" stroke-dasharray="3.4 3.27" stroke-linecap="butt" transform="rotate(-11 12 12)"/>',
+    'light.beacon.max': '<path d="M8 18.5V14a4 4 0 0 1 8 0v4.5M5.5 18.5h13M12 3v2.5M5 6l1.7 1.7M19 6l-1.7 1.7M2.5 12H5M19 12h2.5"/>',
+    'sos': '<text x="12" y="15.4" text-anchor="middle">SOS</text>',
+    'stop.fill': '<rect class="f" x="5.5" y="5.5" width="13" height="13" rx="2.4"/>',
+    'bookmark': '<path d="M7.2 3.5h9.6a1.2 1.2 0 0 1 1.2 1.2v16l-6-4.3-6 4.3v-16a1.2 1.2 0 0 1 1.2-1.2z"/>',
+    'bookmark.fill': '<path class="f" d="M7 3h10a1.5 1.5 0 0 1 1.5 1.5v17L12 16.9l-6.5 4.6v-17A1.5 1.5 0 0 1 7 3z"/>',
+    'equal': '<path d="M5.5 9h13M5.5 15h13"/>',
+    'trash': '<path d="M4 6.5h16M9.5 6.5V4.8a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v1.7M6.2 6.5l.9 12.8a1.6 1.6 0 0 0 1.6 1.5h6.6a1.6 1.6 0 0 0 1.6-1.5l.9-12.8M10 10.5v6.5M14 10.5v6.5"/>',
+  };
+  const WEIGHT = { regular: 1.6, semibold: 2.15, bold: 2.6 };
+  const icon = (name, size, weight = 'regular') =>
+    `<svg class="lp-i" viewBox="0 0 24 24" width="${size}" height="${size}" style="--sw:${WEIGHT[weight]}" aria-hidden="true">${ICONS[name]}</svg>`;
+  panel.querySelectorAll('i[data-i]').forEach(el => {
+    const t = document.createElement('template');
+    t.innerHTML = icon(el.dataset.i, +el.dataset.s, el.dataset.w);
+    const svg = t.content.firstChild; if (el.className) svg.classList.add(el.className);
+    el.replaceWith(svg);
+  });
+
+  // ---- Model (Engine.swift / NotificationSources.swift)
+  const MODES = { steady: 'Steady', breathe: 'Breathe', follow: 'Follow' };
   const blink = (on, off) => [[1, .05, on], [0, .06, off]];
   const rep = (a, n) => Array(n).fill(a).flat();
-  const P = {
-    doubleSwell: [[1,.45,.3],[0,.45,.35],[1,.45,.3],[0,.45,.3]],
-    tripleBlink: rep([...blink(.2,.2), ...blink(.2,.2), ...blink(.2,.7)], 2),
-    heartbeat: rep([...blink(.15,.15), ...blink(.15,.8)], 3),
-    longPulse: [[1,.8,1.4],[0,.8,.3]],
-    beacon: rep(blink(.5,.5), 5),
+  const PAT = {
+    doubleSwell: { t: 'Double swell', i: 'water.waves', s: [[1,.45,.3],[0,.45,.35],[1,.45,.3],[0,.45,.3]] },
+    tripleBlink: { t: 'Triple blink', i: 'ellipsis', s: rep([...blink(.2,.2), ...blink(.2,.2), ...blink(.2,.7)], 2) },
+    heartbeat: { t: 'Heartbeat', i: 'heart.fill', s: rep([...blink(.15,.15), ...blink(.15,.8)], 3) },
+    longPulse: { t: 'Long pulse', i: 'circle.dashed', s: [[1,.8,1.4],[0,.8,.3]] },
+    beacon: { t: 'Beacon', i: 'light.beacon.max', s: rep(blink(.5,.5), 5) },
+    sos: { t: 'S·O·S', i: 'sos', s: (() => { const s = [...blink(.2,.2), ...blink(.2,.2), ...blink(.2,.5)], o = [...blink(.6,.2), ...blink(.6,.2), ...blink(.6,.5)]; return [...s, ...o, ...s]; })() },
   };
-  const NAMES = { doubleSwell: 'Claude finished', tripleBlink: 'Claude needs you', longPulse: 'ChatGPT finished', heartbeat: 'New email', beacon: 'New chat message' };
+  const CUES = {
+    'claude-done': { t: 'Claude finished', p: 'doubleSwell' }, 'claude-input': { t: 'Claude needs you', p: 'tripleBlink' },
+    'chatgpt-done': { t: 'ChatGPT finished', p: 'longPulse' }, 'chatgpt-input': { t: 'ChatGPT needs you', p: 'sos' },
+    'mail': { t: 'New email', p: 'heartbeat' }, 'message': { t: 'New chat message', p: 'longPulse' }, 'alert': { t: 'Alert', p: 'beacon' },
+  };
+  const SOURCES = [
+    { id: 'claude', t: 'Claude', i: 'sparkles', cues: ['claude-done', 'claude-input'] },
+    { id: 'chatgpt', t: 'ChatGPT', i: 'bubble.left.and.text.bubble.right', cues: ['chatgpt-done', 'chatgpt-input'] },
+    { id: 'email', t: 'Email', i: 'envelope.fill', cues: ['mail'] },
+    { id: 'chat', t: 'Chat', i: 'bubble.left.fill', cues: ['message'] },
+    { id: 'scripts', t: 'Scripts', i: 'terminal', cues: ['alert'] },
+  ];
+  const MORSE = { A:'.-',B:'-...',C:'-.-.',D:'-..',E:'.',F:'..-.',G:'--.',H:'....',I:'..',J:'.---',K:'-.-',L:'.-..',M:'--',N:'-.',O:'---',P:'.--.',Q:'--.-',R:'.-.',S:'...',T:'-',U:'..-',V:'...-',W:'.--',X:'-..-',Y:'-.--',Z:'--..',
+    0:'-----',1:'.----',2:'..---',3:'...--',4:'....-',5:'.....',6:'-....',7:'--...',8:'---..',9:'----.','.':'.-.-.-',',':'--..--','?':'..--..','!':'-.-.--','/':'-..-.','@':'.--.-.','-':'-....-',"'":'.----.','(':'-.--.',')':'-.--.-','&':'.-...',':':'---...','=':'-...-','+':'.-.-.','"':'.-..-.','Å':'.--.-','Ä':'.-.-','Ö':'---.' };
 
-  function play(steps, name, done) {
-    // Each step fades from the previous level; the first starts from what's showing.
-    seq = [[shown, 0, 0], ...steps, [0, .06, .25]]; seqName = name; t0 = performance.now() / 1000; onDone = done;
-    status();
+  const S = { on: true, mode: 'steady', lastOn: 'steady', level: 60, breath: 5, auto: true, drawer: 'notifications',
+    live: { claude: true, email: true }, pattern: {}, cueMorse: {}, openCue: null, info: false, copied: false,
+    cueLevel: 100, cuesClosed: true, keepGlow: false, login: true, rules: [], unit: .25, saved: [] };
+  const patternFor = c => S.pattern[c] || CUES[c].p;
+  let P = null, cursor = null, shown = .6;   // what's playing, the Morse position, the level on the lid
+
+  // ---- Playback: steps are [level 0…1, fade s, hold s], like Engine.play
+  function play(id, note, steps, peak, marks) {
+    P = { id, note, steps, peak, marks, from: shown, t0: performance.now() / 1000 }; cursor = null; render();
   }
-  function seqLevel(t) {
-    let at = 0, prev = seq[0][0];
-    for (const [l, f, h] of seq) {
-      if (t < at + f) return prev + (l - prev) * (t - at) / f;
-      if (t < at + f + h) return l;
-      at += f + h; prev = l;
+  function stop() { P = null; cursor = null; render(); }
+  function sample(t) {
+    let at = 0, prev = P.from;
+    for (let i = 0; i < P.steps.length; i++) {
+      const [l, f, h] = P.steps[i], v = l * P.peak;
+      if (t < at + f) return [prev + (v - prev) * (t - at) / f, i];
+      if (t < at + f + h) return [v, i];
+      at += f + h; prev = v;
     }
     return null;
   }
-  function base(now) {
+  function fire(cue, override) {
+    if (!override && S.cueMorse[cue]) return morse(S.cueMorse[cue]);
+    play(cue, null, [[0, .1, .15], ...PAT[override || patternFor(cue)].s], S.cueLevel / 100);
+  }
+  // Standard timing: dot 1 unit, dash 3, gap 1, letter gap 3, word gap 7. Fixed 60 %, like the app.
+  function morse(text) {
+    const u = Math.min(.4, Math.max(.18, S.unit)), f = .05, chars = [...text.toUpperCase()];
+    const steps = [[0, .1, .6]], marks = {}; let lastWasLetter = false;
+    chars.forEach((ch, ci) => {
+      if (/\s/.test(ch)) { if (lastWasLetter) steps[steps.length - 1][2] += 4 * u; lastWasLetter = false; return; }
+      const code = MORSE[ch]; if (!code) return;
+      [...code].forEach((sym, si) => {
+        marks[steps.length] = { char: ci, symbol: si };
+        steps.push([1, f, (sym === '-' ? 3 * u : u) - f], [0, f, u - f]);
+      });
+      steps[steps.length - 1][2] += 2 * u; lastWasLetter = true;
+    });
+    if (steps.length > 1) play('morse', chars.join(''), steps, .6, marks);
+  }
+  function base(t) {
     if (!S.on) return 0;
     const L = S.level / 100 * (S.auto ? .85 : 1);
-    if (S.mode === 'breathe') return L * (.5 - .5 * Math.cos(now * 2 * Math.PI / S.period));
-    if (S.mode === 'follow') return L * .8;
-    return L;
-  }
-  function draw(v) {
-    // Same look as the app preview: dark when off, opaque white once lit, a tight glow.
-    const x = Math.min(1, v), fill = Math.pow(x, .45);
-    const w = Math.round(255 * (.07 + .93 * fill));
-    logo.style.background = `rgb(${w},${w},${w})`;
-    glowf.style.filter = `drop-shadow(0 0 ${2 + 6 * x}px rgba(255,255,255,${(.9 * fill * (.3 + .7 * x)).toFixed(3)}))`;
-  }
-  function status() {
-    if (seq) { st.textContent = seqName; lbl.textContent = seqName.startsWith('Morse') ? 'MORSE' : 'NOTIFICATION'; return; }
-    lbl.textContent = S.on ? S.mode.toUpperCase() : 'OFF';
-    st.textContent = !S.on ? 'Off' : S.mode === 'breathe' ? 'Breathing' : S.mode === 'follow' ? 'Following your screen' : `Glowing at ${S.level}%`;
+    if (S.mode === 'breathe') return L * (.5 - .5 * Math.cos(t * 2 * Math.PI / (2 * Math.max(.75, S.breath / 2))));
+    return S.mode === 'follow' ? L * .8 : L;
   }
   function frame(ms) {
-    const now = ms / 1000;
-    if (seq) {
-      const v = seqLevel(now - t0);
-      if (v === null) { seq = null; const d = onDone; onDone = null; status(); d && d(); }
-      else shown = v;
+    const t = ms / 1000;
+    if (P) {
+      const r = sample(t - P.t0);
+      if (!r) stop();
+      else {
+        shown = r[0];
+        const m = P.marks && P.marks[r[1]];
+        if (m && (!cursor || m.char !== cursor.char || m.symbol !== cursor.symbol)) { cursor = m; renderTrack(); }
+      }
     }
-    if (!seq) { const target = base(now); shown += (target - shown) * (S.mode === 'breathe' ? 1 : .12); }
-    draw(Math.max(0, shown));
+    if (!P) shown += (base(t) - shown) * (S.mode === 'breathe' && S.on ? 1 : .12);
+    renderLogo(Math.max(0, shown));
     requestAnimationFrame(frame);
   }
 
-  power.onclick = () => { S.on = !S.on; power.setAttribute('aria-checked', S.on); power.ariaLabel = S.on ? 'Light on' : 'Light off'; status(); };
-  document.querySelectorAll('.mode').forEach(b => b.onclick = () => {
-    S.mode = b.dataset.mode; if (!S.on) power.onclick();
-    document.querySelectorAll('.mode').forEach(x => x.setAttribute('aria-pressed', x === b)); status();
-  });
-  lvl.oninput = () => { S.level = +lvl.value; if (!S.on) power.onclick(); status(); };
-  $('auto').onclick = e => { S.auto = !S.auto; e.target.setAttribute('aria-pressed', S.auto); e.target.textContent = S.auto ? 'On' : 'Off'; };
-  document.querySelectorAll('.tab').forEach(b => b.onclick = () => {
-    document.querySelectorAll('.tab').forEach(x => { x.setAttribute('aria-selected', x === b); $('d-' + x.dataset.tab).hidden = x !== b; });
-  });
-  document.querySelectorAll('[data-speed]').forEach(b => b.onclick = () => {
-    S.period = +b.dataset.speed; document.querySelectorAll('[data-speed]').forEach(x => x.setAttribute('aria-pressed', x === b));
-  });
-  document.querySelectorAll('.cue').forEach(b => b.onclick = () => {
-    stopMorse(); document.querySelectorAll('.cue').forEach(x => x.classList.toggle('on', x === b));
-    play(P[b.dataset.cue], NAMES[b.dataset.cue], () => b.classList.remove('on'));
-  });
-
-  // Morse: unit 0.25 s, dash = 3 units, letter gap 3, word gap 7 — like the app.
-  const M = { A:'.-',B:'-...',C:'-.-.',D:'-..',E:'.',F:'..-.',G:'--.',H:'....',I:'..',J:'.---',K:'-.-',L:'.-..',M:'--',N:'-.',O:'---',P:'.--.',Q:'--.-',R:'.-.',S:'...',T:'-',U:'..-',V:'...-',W:'.--',X:'-..-',Y:'-.--',Z:'--..',
-    0:'-----',1:'.----',2:'..---',3:'...--',4:'....-',5:'.....',6:'-....',7:'--...',8:'---..',9:'----.' };
-  const mtext = $('mtext'), track = $('mtrack'); let timers = [];
-  function renderTrack() {
-    track.innerHTML = '';
-    for (const ch of mtext.value.toUpperCase()) {
-      if (!M[ch]) continue;
-      const d = document.createElement('span'); d.className = 'letter';
-      d.innerHTML = `<span class="syms">${[...M[ch]].map(c => `<i class="sym ${c === '.' ? 'dot' : 'dash'}"></i>`).join('')}</span>${ch}`;
-      track.appendChild(d);
-    }
-  }
-  function stopMorse() { timers.forEach(clearTimeout); timers = []; track.querySelectorAll('.sym').forEach(x => x.classList.remove('lit', 'sent')); track.querySelectorAll('.letter').forEach(x => x.classList.remove('cur')); }
-  mtext.oninput = () => { const p = mtext.selectionStart; mtext.value = mtext.value.toUpperCase().replace(/[^A-Z0-9 ]/g, ''); mtext.setSelectionRange(p, p); stopMorse(); renderTrack(); };
-  $('mform').onsubmit = e => {
-    e.preventDefault(); stopMorse(); document.querySelectorAll('.cue').forEach(x => x.classList.remove('on'));
-    const u = .25, steps = [], letters = track.querySelectorAll('.letter'); let t = .06, li = 0;
-    const words = mtext.value.toUpperCase().trim().split(/\s+/);
-    words.forEach((w, wi) => {
-      [...w].forEach((ch, ci) => {
-        if (!M[ch]) return;
-        const el = letters[li++], syms = el.querySelectorAll('.sym');
-        [...M[ch]].forEach((c, k) => {
-          const on = (c === '-' ? 3 : 1) * u, at = t;
-          timers.push(setTimeout(() => { letters.forEach(x => x.classList.toggle('cur', x === el)); syms[k].classList.add('lit'); }, at * 1000));
-          timers.push(setTimeout(() => { syms[k].classList.replace('lit', 'sent'); }, (at + on) * 1000));
-          const last = k === M[ch].length - 1, gap = last ? (ci === w.length - 1 && wi < words.length - 1 ? 7 : 3) * u : u;
-          steps.push([1, .04, on - .04], [0, .06, gap - .06]); t += on + gap;
-        });
-      });
+  // ---- Sliders (GlowSlider: 6 pt track, 18 pt knob)
+  function slider(el, min, max, get, set) {
+    el.innerHTML = '<span class="fill"></span><span class="knob"></span>';
+    el.setAttribute('aria-valuemin', min); el.setAttribute('aria-valuemax', max);
+    const show = () => { el.style.setProperty('--f', (get() - min) / (max - min)); el.setAttribute('aria-valuenow', get()); };
+    const at = e => { const r = el.getBoundingClientRect(), p = Math.min(1, Math.max(0, (e.clientX - r.left - 9 * r.width / el.offsetWidth) / Math.max(1, r.width * (1 - 18 / el.offsetWidth))));
+      set(Math.round(min + p * (max - min))); };
+    el.addEventListener('pointerdown', e => { el.setPointerCapture(e.pointerId); at(e); el.onpointermove = at; });
+    el.addEventListener('pointerup', () => { el.onpointermove = null; });
+    el.addEventListener('keydown', e => {
+      const d = { ArrowRight: 1, ArrowUp: 1, ArrowLeft: -1, ArrowDown: -1, PageUp: 10, PageDown: -10 }[e.key];
+      if (d) { e.preventDefault(); set(Math.min(max, Math.max(min, get() + d))); }
     });
-    if (!steps.length) return;
-    timers.push(setTimeout(() => letters.forEach(x => x.classList.remove('cur')), t * 1000));
-    play(steps, 'Morse · ' + mtext.value.trim().toUpperCase());
+    return show;
+  }
+  const lvlShow = slider($('lvl'), 0, 100, () => S.level, v => { S.level = v; render(); });
+  const flashShow = slider($('flash'), 10, 100, () => S.cueLevel, v => { S.cueLevel = v; flashShow(); });
+
+  // ---- Rendering
+  const status = () => {
+    if (P && P.id === 'morse') return 'Sending Morse: ' + P.note;
+    if (P) return 'Flashing: ' + CUES[P.id].t;
+    if (!S.on) return 'Resting in the dark';
+    if (S.mode === 'breathe') return `Breathing up to ${S.level}%, ${S.breath.toFixed(1)} s`;
+    if (S.mode === 'follow') return 'Following your screen';
+    return S.level < .5 ? 'Steady, dark' : `Glowing at ${S.level}%`;
   };
-  renderTrack();
+  const pill = (act, arg, title, ic, cls = '') =>
+    `<button class="lp-pill ${cls}" data-act="${act}"${arg != null ? ` data-arg="${esc(arg)}"` : ''}>${ic ? icon(ic, 13, 'semibold') : ''}${esc(title)}</button>`;
+  const anyLive = () => SOURCES.some(s => S.live[s.id]);
+
+  function render() {
+    $('st').textContent = status();
+    $('lbl').textContent = P ? (P.id === 'morse' ? 'MORSE' : 'CUE') : S.on ? MODES[S.mode].toUpperCase() : 'OFF';
+    $('power').setAttribute('aria-checked', S.on);
+    panel.querySelectorAll('.lp-mode').forEach(b => b.setAttribute('aria-pressed', S.on && b.dataset.arg === S.mode));
+    $('bright').hidden = !S.on;
+    const br = S.on && S.mode === 'breathe';
+    $('speed').hidden = !br;
+    $('speed').querySelectorAll('button').forEach(b => b.classList.toggle('on', Math.abs(S.breath - b.dataset.arg) < 1));
+    $('auto').classList.toggle('low', br);
+    $('auto').setAttribute('aria-checked', S.auto);
+    $('auto').lastElementChild.classList.toggle('on', S.auto);
+    lvlShow(); flashShow();
+    $('bellic').innerHTML = icon(anyLive() ? 'bell' : 'bell.slash', 13, 'semibold');
+    panel.querySelectorAll('.lp-tab').forEach(b => {
+      const open = b.dataset.arg === S.drawer;
+      b.setAttribute('aria-selected', open);
+      const d = $('d-' + b.dataset.arg); if (d.hidden === open) d.hidden = !open;
+    });
+    renderSettings(); renderSources(); renderMorse();
+  }
+
+  function renderSettings() {
+    $('keep').className = 'lp-onoff' + (S.keepGlow ? ' on' : ''); $('keep').textContent = S.keepGlow ? 'On' : 'Off';
+    $('login').className = 'lp-pill' + (S.login ? ' on' : '');
+    $('login').innerHTML = icon(S.login ? 'checkmark' : 'power', 13, 'semibold') + 'At login';
+    const rules = $('rules'); rules.hidden = !S.rules.length;
+    const chip = (i, act, arg, ic, on, title) =>
+      `<button class="lp-ichip${on ? ' on' : ''}" data-act="${act}" data-arg="${i}${arg != null ? ':' + arg : ''}" title="${title}">${icon(ic, 13)}</button>`;
+    rules.innerHTML = S.rules.map((r, i) => `<div class="lp-rule${r.on ? '' : ' off'}">
+      <div class="lp-row6"><button data-act="rule-on" data-arg="${i}" aria-label="Use this window"><span class="lp-mini${r.on ? ' on' : ''}"></span></button>
+        <input class="lp-time" type="time" value="${r.start}" data-rule="${i}" data-k="start" aria-label="From"><span class="lp-dash">–</span>
+        <input class="lp-time" type="time" value="${r.end}" data-rule="${i}" data-k="end" aria-label="To"><span class="lp-sp"></span>
+        <button class="lp-trash" data-act="rule-del" data-arg="${i}" title="Remove this window">${icon('trash', 13)}</button></div>
+      <div class="lp-row6" style="gap:4px">${chip(i, 'rule-mode', '', 'equal', r.mode === '', 'Keep mode')}${
+        [['off', 'moon.zzz.fill', 'Off'], ['steady', 'sun.max.fill', 'Steady'], ['breathe', 'wind', 'Breathe'], ['follow', 'display', 'Follow screen']]
+          .map(([m, ic, t]) => chip(i, 'rule-mode', m, ic, r.mode === m, t)).join('')}<span class="lp-sp"></span>${
+        chip(i, 'rule-mute', null, r.mute ? 'bell.slash.fill' : 'bell', r.mute, r.mute ? 'Cues muted' : 'Cues on')}</div></div>`).join('');
+  }
+
+  function renderSources() {
+    const playingCue = c => P && (P.id === c || (P.id === 'morse' && S.cueMorse[c] === P.note));
+    $('srcs').innerHTML = SOURCES.map(src => {
+      const live = !!S.live[src.id], open = live && src.cues.includes(S.openCue);
+      const cues = live ? `<div class="lp-cues">${src.cues.map(c => `<div class="lp-cue">${src.cues.length > 1
+          ? `<span class="kind" title="${CUES[c].t}">${icon(c.endsWith('input') ? 'hand.raised' : 'checkmark', 12, 'semibold')}</span>` : ''}<button class="lp-sig${S.openCue === c ? ' open' : ''}" data-act="sig" data-arg="${c}" title="${esc(S.cueMorse[c] ? 'Morse: ' + S.cueMorse[c] : PAT[patternFor(c)].t)}">${
+          icon(S.cueMorse[c] ? 'dot.radiowaves.right' : PAT[patternFor(c)].i, 13, 'semibold')}</button><button class="lp-play" data-act="play" data-arg="${c}" title="Try it on the logo">${
+          icon(playingCue(c) ? 'light.max' : 'play.fill', 11, 'bold')}</button></div>`).join('')}</div>` : '';
+      let picker = '';
+      if (open) {
+        const c = S.openCue, cur = patternFor(c), m = S.cueMorse[c];
+        picker = `<div class="lp-col8" style="gap:6px;padding-top:2px"><div class="lp-pats">${Object.entries(PAT).map(([k, p]) =>
+          `<button class="lp-pat${k === cur && !m ? ' on' : ''}" data-act="pat" data-arg="${c}:${k}">${icon(p.i, 12, 'semibold')}${p.t}</button>`).join('')}</div>${
+          S.saved.length ? `<div class="lp-flow">${S.saved.map((t, i) => `<button class="lp-mchip${m === t ? ' on' : ''}" data-act="cuemorse" data-arg="${c}:${i}">${icon('dot.radiowaves.right', 12)}${esc(t)}</button>`).join('')}</div>` : ''}</div>`;
+      }
+      const info = src.id === 'scripts' ? `<button class="lp-info" data-act="info" aria-label="About Scripts">${icon('info.circle', 13)}</button>` : '';
+      const pop = src.id === 'scripts' && S.info ? `<div class="lp-pop" id="pop"><p>Flash the logo from your own scripts, Shortcuts or automations.</p>
+        <div class="lp-row6"><code>lidlit cue alert</code><button class="copy" data-act="copy">${S.copied ? 'Copied' : 'Copy'}</button></div>
+        <small>Or open lidlit://cue/alert from Shortcuts.</small></div>` : '';
+      return `<div class="lp-src${live ? ' live' : ' dim'}"><div class="top"><div class="name"><span class="lp-srcicon">${icon(src.i, 16)}</span><span class="t">${src.t}</span>${info}<button class="lp-onoff${live ? ' on' : ''}" data-act="live" data-arg="${src.id}" title="${live ? 'Flashes the logo. Click to turn off.' : 'Click to turn on.'}">${live ? 'On' : 'Off'}</button></div>${cues}</div>${picker}</div>${pop}`;
+    }).join('');
+    $('closedcues').classList.toggle('on', S.cuesClosed);
+    $('closedcues').parentElement.setAttribute('aria-checked', S.cuesClosed);
+  }
+
+  const mtext = $('mtext');
+  function renderTrack() {
+    const playing = P && P.id === 'morse', text = playing ? P.note : mtext.value.toUpperCase(), cur = playing ? cursor : null;
+    $('mtrack').innerHTML = [...text].map((ch, i) => {
+      if (/\s/.test(ch)) return '<span class="lp-mspace"></span>';
+      const code = MORSE[ch]; if (!code) return '';
+      const st = !cur ? '' : i < cur.char ? 'done' : i === cur.char ? 'cur' : 'up';
+      return `<span class="lp-letter ${st}">${esc(ch)}<span class="lp-syms">${[...code].map((s, si) => {
+        const lit = st === 'cur' && si === cur.symbol, sent = st === 'done' || (st === 'cur' && si < cur.symbol);
+        return `<i class="lp-sym${s === '-' ? ' dash' : ''}${lit ? ' lit' : sent ? ' sent' : ''}"></i>`; }).join('')}</span></span>`;
+    }).join('');
+  }
+  function renderMorse() {
+    const playing = P && P.id === 'morse', text = mtext.value.trim().toUpperCase();
+    $('msend').innerHTML = playing ? pill('stop', null, 'Stop', 'stop.fill') : pill('send', null, 'Send', 'dot.radiowaves.right', 'pro');
+    renderTrack();
+    $('mspeeds').innerHTML = [['Slow', .35], ['Normal', .25], ['Fast', .18]].map(([t, u]) => pill('unit', u, t, null, Math.abs(S.unit - u) < .03 ? 'on' : '')).join('')
+      + '<span class="lp-sp"></span>' + pill('save', null, 'Save', S.saved.includes(text) ? 'bookmark.fill' : 'bookmark');
+    $('mspeeds').lastElementChild.title = 'Keep this message to send again or use as a notification';
+    $('saved').hidden = $('saved-div').hidden = !S.saved.length;
+    $('saved').innerHTML = `<span class="lp-label">Saved messages</span><div class="lp-flow">${S.saved.map((t, i) => {
+      const on = playing && P.note === t;
+      return `<span class="lp-schip${on ? ' on' : ''}"><button data-act="ssend" data-arg="${i}" title="Send on the logo">${icon(on ? 'light.max' : 'play.fill', 11, 'bold')}${esc(t)}</button><button class="x" data-act="sdel" data-arg="${i}" title="Remove">${icon('xmark', 10, 'bold')}</button></span>`;
+    }).join('')}</div><p class="lp-note">Saved messages can also be a notification's signal (Notifications › tap a row).</p>`;
+  }
+
+  // ---- Actions
+  const act = {
+    power: () => { if (S.on) { S.lastOn = S.mode; S.on = false; } else { S.on = true; S.mode = S.lastOn; } },
+    mode: m => { S.mode = S.lastOn = m; S.on = true; },
+    speed: v => { S.breath = +v; },
+    auto: () => { S.auto = !S.auto; },
+    tab: t => { S.drawer = S.drawer === t ? '' : t; S.info = false; },
+    add: () => { S.rules.push({ start: '22:00', end: '08:00', mode: 'off', mute: true, on: true }); },
+    'rule-on': i => { S.rules[i].on = !S.rules[i].on; },
+    'rule-del': i => { S.rules.splice(i, 1); },
+    'rule-mode': a => { const [i, m] = a.split(':'); S.rules[i].mode = m; },
+    'rule-mute': i => { S.rules[i].mute = !S.rules[i].mute; },
+    keep: () => { S.keepGlow = !S.keepGlow; },
+    login: () => { S.login = !S.login; },
+    reset: () => { P = null; S.on = true; S.mode = S.lastOn = 'follow'; S.level = 100; S.auto = true; },
+    quit: () => {},   // nothing to quit on a web page; the logo would keep its current look anyway
+    live: id => { S.live[id] = !S.live[id]; if (!S.live[id] && SOURCES.find(s => s.id === id).cues.includes(S.openCue)) S.openCue = null; },
+    sig: c => { S.openCue = S.openCue === c ? null : c; },
+    play: c => fire(c),
+    pat: a => { const [c, p] = a.split(':'); S.pattern[c] = p; delete S.cueMorse[c]; fire(c, p); },
+    cuemorse: a => { const [c, i] = a.split(':'); S.cueMorse[c] = S.saved[i]; fire(c); },
+    closedcues: () => { S.cuesClosed = !S.cuesClosed; },
+    info: () => { S.info = !S.info; S.copied = false; },
+    copy: () => { navigator.clipboard && navigator.clipboard.writeText('lidlit cue alert').catch(() => {}); S.copied = true; },
+    send: () => morse(mtext.value),
+    stop: () => stop(),
+    unit: u => { S.unit = +u; },
+    save: () => { const t = mtext.value.trim().toUpperCase(); if (t) S.saved = [t, ...S.saved.filter(x => x !== t)]; },
+    ssend: i => { mtext.value = S.saved[i]; morse(S.saved[i]); },
+    sdel: i => { const t = S.saved[i]; S.saved.splice(i, 1); for (const c in S.cueMorse) if (S.cueMorse[c] === t) delete S.cueMorse[c]; },
+  };
+  panel.addEventListener('click', e => {
+    const b = e.target.closest('[data-act]');
+    if (S.info && !e.target.closest('#pop, [data-act="info"]')) { S.info = false; if (!b) render(); }
+    if (!b || !panel.contains(b)) return;
+    e.preventDefault();
+    act[b.dataset.act](b.dataset.arg);
+    render();
+  });
+  panel.addEventListener('change', e => {
+    const el = e.target; if (!el.dataset.rule) return;
+    S.rules[el.dataset.rule][el.dataset.k] = el.value;
+  });
+  mtext.addEventListener('input', () => {
+    const p = mtext.selectionStart; mtext.value = mtext.value.toUpperCase(); mtext.setSelectionRange(p, p);
+    renderMorse();
+  });
+  $('mform').addEventListener('submit', e => { e.preventDefault(); morse(mtext.value); });
+
+  render();
   requestAnimationFrame(frame);
 })();
+</script>
+<script>
+// Two independent columns, so opening a question only moves the questions under it.
+(() => { const f = document.querySelector('.faq'); if (!f) return;
+  const items = [...f.querySelectorAll(':scope > details')];
+  const cols = [document.createElement('div'), document.createElement('div')];
+  cols.forEach(c => { c.className = 'col'; f.appendChild(c); });
+  items.forEach((d, i) => cols[i % 2].appendChild(d)); })();
 </script>
 </body>
 </html>
