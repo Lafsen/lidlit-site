@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Lidlit – the glowing Apple logo on your MacBook Pro lid, made useful</title>
-<meta name="description" content="Lidlit is a free macOS menu bar app that controls the glowing Apple logo on your MacBook Pro lid: a steady glow, breathing, or a blink when Claude, ChatGPT, email or chat needs you. Free download.">
+<meta name="description" content="Lidlit is a free macOS menu bar app that controls the glowing Apple logo on your MacBook Pro lid: a steady glow, a slow pulse, or a blink when Claude, ChatGPT, email or chat needs you. Free download.">
 <link rel="canonical" href="https://lidlit.app/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#000000">
@@ -36,7 +36,7 @@
   "@type": "SoftwareApplication",
   "name": "Lidlit",
   "alternateName": "Lidlight",
-  "description": "Lidlit is a free macOS menu bar app that controls the glowing Apple logo on your MacBook Pro lid: a steady glow, breathing, or a blink when Claude, ChatGPT, email or chat needs you.",
+  "description": "Lidlit is a free macOS menu bar app that controls the glowing Apple logo on your MacBook Pro lid: a steady glow, a slow pulse, or a blink when Claude, ChatGPT, email or chat needs you.",
   "url": "https://lidlit.app/",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "macOS 14 or later (MacBook Pro XDR with a lit logo, Apple silicon)",
@@ -55,7 +55,7 @@
    "priceCurrency": "USD"
   },
   "featureList": [
-   "Steady glow, breathing, or follow the screen brightness",
+   "Glow, pulse, or follow the screen brightness",
    "Auto-dim to room light",
    "Blink when Claude Code or Codex finishes or needs you",
    "Blink for new email and chat messages",
@@ -84,7 +84,7 @@
     "name": "What is Lidlit?",
     "acceptedAnswer": {
      "@type": "Answer",
-     "text": "A free menu bar app for macOS that controls the glowing Apple logo on the lid of a MacBook Pro XDR. It can glow steadily, breathe, follow your screen, blink when Claude, ChatGPT, email or chat needs you, and spell messages in Morse code."
+     "text": "A free menu bar app for macOS that controls the glowing Apple logo on the lid of a MacBook Pro XDR. It can glow steadily, pulse, follow your screen, blink when Claude, ChatGPT, email or chat needs you, and spell messages in Morse code."
     }
    },
    {
@@ -92,7 +92,7 @@
     "name": "How much CPU does it use?",
     "acceptedAnswer": {
      "@type": "Answer",
-     "text": "None you can measure: 0.0 % at rest. While breathing, macOS does the fading itself (about 2 % in its own brightness service)."
+     "text": "None you can measure: 0.0 % at rest. While pulsing, macOS does the fading itself (about 2 % in its own brightness service)."
     }
    },
    {
@@ -108,7 +108,7 @@
     "name": "Does it work with the lid closed?",
     "acceptedAnswer": {
      "@type": "Answer",
-     "text": "Yes. Turn on Keep the glow, or let only notifications flash."
+     "text": "Yes. With the lid closed, the laptop button on the lid preview keeps it glowing, and alerts can still flash on their own."
     }
    },
    {
@@ -276,6 +276,13 @@ section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hai
 @media (max-width: 369px) { .panel { zoom: .88; } }
 :where(.panel) button { font: inherit; color: inherit; background: none; border: 0; padding: 0; margin: 0; cursor: pointer; text-align: inherit; }
 .panel [hidden] { display: none !important; }
+/* Instant tooltips for icon-only controls. */
+.panel [data-tip] { position: relative; }
+.panel [data-tip]:hover::after, .panel [data-tip]:focus-visible::after { content: attr(data-tip); position: absolute; left: 50%; bottom: calc(100% + 6px); transform: translateX(-50%);
+  white-space: nowrap; padding: 4px 8px; border-radius: 6px; background: #3a3a3c; color: #f5f5f7; font-size: 11px; font-weight: 400; line-height: 1.2;
+  box-shadow: 0 2px 8px rgba(0,0,0,.4); pointer-events: none; z-index: 5; }
+.panel .lp-row6 > [data-tip]:last-child:hover::after, .panel [data-tip].tip-r:hover::after, .panel [data-tip].tip-r:focus-visible::after { left: auto; right: 0; transform: none; }
+.panel [data-tip].tip-w:hover::after, .panel [data-tip].tip-w:focus-visible::after { white-space: normal; width: max-content; max-width: 200px; text-align: left; }
 .lp-i { display: block; flex: none; fill: none; stroke: currentColor; stroke-width: var(--sw, 1.6); stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
 .lp-i .f { fill: currentColor; stroke: none; }
 .lp-i text { fill: currentColor; stroke: none; font: 800 9.5px var(--font); letter-spacing: -.2px; }
@@ -284,11 +291,8 @@ section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hai
 /* Header */
 .lp-head { display: flex; align-items: center; gap: 10px; }
 .lp-glyph { width: 34px; height: 34px; border-radius: 50%; background: var(--c-hair); display: grid; place-items: center; flex: none; color: var(--c-ink); }
-.lp-t { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
-.lp-title { font-size: 17px; font-weight: 600; display: flex; align-items: center; gap: 5px; }
-.lp-heart { display: inline-flex; width: 16px; height: 16px; align-items: center; justify-content: center; color: var(--c-ink3); opacity: .6; }
-.lp-heart:hover { opacity: 1; color: var(--c-ink2); }
-.lp-status { font-size: 11.5px; color: var(--c-ink2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lp-t { flex: 1; min-width: 0; display: flex; align-items: center; }
+.lp-title { font-size: 17px; font-weight: 600; }
 
 /* Switches (GlowSwitch 40×23 with a symbol in the knob, MiniSwitch 30×18) */
 .lp-switch { position: relative; width: 40px; height: 23px; border-radius: 999px; background: var(--c-hair); flex: none; transition: background .2s; }
@@ -309,9 +313,9 @@ section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hai
   box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); display: grid; place-items: center; overflow: hidden; }
 .lp-lbl { position: absolute; left: 10px; bottom: 10px; font-size: 9px; line-height: 1; font-weight: 600; letter-spacing: 1.2px; color: rgba(0,0,0,.35); }
 
-/* Mode tiles */
-.lp-modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-/* A quiet invitation: a soft ring breathes around one tile a few times, until the first touch. */
+/* Mode tiles (Glow, Pulse) and panel tiles (Alerts, Morse) */
+.lp-modes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+/* A quiet invitation: a soft ring pulses around one tile a few times, until the first touch. */
 .lp-mode.invite { animation: lp-invite 2.4s ease-out 3; }
 @keyframes lp-invite { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,.28); } 70%, 100% { box-shadow: 0 0 0 9px rgba(255,255,255,0); } }
 @media (prefers-reduced-motion: reduce) { .lp-mode.invite { animation: none; } }
@@ -321,6 +325,13 @@ section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hai
 .lp-mode:hover { background: var(--c-hair); }
 .lp-mode[aria-pressed="true"] { background: var(--c-soft); box-shadow: none; color: var(--c-ink); font-weight: 600; }
 .lp-mode[aria-pressed="true"] .ic { color: var(--c-ink); }
+/* PanelTile: outlined (dashed) when closed, so it reads differently from the modes; opens settings below without changing the light. */
+.lp-ptile { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 9px 0; border-radius: 12px; border: 1px dashed var(--c-hair);
+  color: var(--c-ink2); font-size: 11px; transition: background .12s; }
+.lp-ptile .ic { height: 20px; display: grid; place-items: center; color: var(--c-ink3); }
+.lp-ptile:hover { background: rgba(255,255,255,.04); }
+.lp-ptile[aria-expanded="true"] { background: var(--c-hair); border-style: solid; color: var(--c-ink); font-weight: 600; }
+.lp-ptile[aria-expanded="true"] .ic { color: var(--c-ink); }
 
 /* Brightness */
 .lp-bright { display: flex; flex-direction: column; gap: 10px; padding: 0 2px; }
@@ -331,12 +342,10 @@ section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hai
 .lp-slider .knob { position: absolute; top: 1px; left: calc((100% - 18px) * var(--f)); width: 18px; height: 18px; border-radius: 50%; background: #fff;
   box-shadow: 0 1px 4px rgba(0,0,0,.15), inset 0 0 0 1px var(--c-hair); }
 .lp-slider:focus-visible { outline: none; } .lp-slider:focus-visible .knob { outline: 2px solid var(--c-ink); outline-offset: 2px; }
-.lp-arow { display: flex; align-items: flex-start; gap: 8px; }
+.lp-arow { display: flex; align-items: center; gap: 8px; }
 .lp-speed { display: flex; flex-direction: column; gap: 6px; }
-.lp-speed > span { font-size: 10.5px; color: var(--c-ink3); }
 .lp-speed > div { display: flex; gap: 5px; }
 .lp-auto { display: flex; align-items: center; gap: 7px; font-size: 10.5px; color: var(--c-ink3); }
-.lp-auto.low { padding-top: 21px; }
 
 /* Pills */
 .lp-pill { display: inline-flex; align-items: center; gap: 5px; padding: 6px 11px; border-radius: 999px; font-size: 12px; font-weight: 600;
@@ -345,13 +354,15 @@ section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hai
 .lp-pill.on { background: var(--c-soft); box-shadow: none; }
 .lp-pill.pro { background: var(--c-strong); color: var(--c-on-strong); box-shadow: none; }
 .lp-pill.pro:hover { background: var(--c-accent-line); }
-.lp-pill.light { padding: 4px 10px; font-size: 11.5px; font-weight: 400; }
+.lp-pill.light { padding: 2px 10px; font-size: 11.5px; line-height: 14px; font-weight: 400; }
 
-/* Menu bar: Settings · Notifications · Morse */
+/* Menu bar: Settings · Donate */
 .lp-bar { display: flex; align-items: center; gap: 4px; }
 .lp-tab { display: inline-flex; align-items: center; gap: 5px; padding: 6px 10px; border-radius: 999px; font-size: 12px; font-weight: 600;
   color: var(--c-ink2); white-space: nowrap; flex: none; }
-.lp-tab[aria-selected="true"] { color: var(--c-ink); background: var(--c-hair); }
+.lp-tab[aria-expanded="true"] { color: var(--c-ink); background: var(--c-hair); }
+.lp-donate { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; font-size: 11px; color: var(--c-ink3); text-decoration: none; white-space: nowrap; flex: none; }
+.lp-donate:hover { color: var(--c-ink2); }
 
 /* Menus */
 .lp-card { display: flex; flex-direction: column; gap: 14px; padding: 14px; border-radius: 14px; background: var(--c-card); box-shadow: inset 0 0 0 1px var(--c-hair);
@@ -370,8 +381,6 @@ section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hai
 .lp-onoff { font-size: 10.5px; font-weight: 600; padding: 2.5px 8px; border-radius: 999px; color: var(--c-ink3);
   box-shadow: inset 0 0 0 1px var(--c-hair); flex: none; }
 .lp-onoff.on { background: var(--c-strong); color: var(--c-on-strong); box-shadow: none; }
-.lp-support { align-self: center; display: inline-flex; align-items: center; gap: 6px; font-size: 10.5px; color: var(--c-ink3); text-decoration: none; }
-.lp-support:hover { color: var(--c-ink2); }
 
 /* Schedule windows */
 .lp-rule { display: flex; flex-direction: column; gap: 8px; padding: 10px; border-radius: 12px; background: var(--c-canvas); box-shadow: inset 0 0 0 1px var(--c-hair); }
@@ -418,7 +427,9 @@ section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hai
 .lp-pop .copy { font-size: 11px; font-weight: 600; color: var(--c-ink2); }
 .lp-pop small { font-size: 11px; color: var(--c-ink3); }
 
-/* Morse */
+/* Morse (under the brightness row while the Morse panel is open) */
+.lp-morse { display: flex; flex-direction: column; gap: 12px; padding: 0 2px; animation: lp-in .22s ease-out; }
+@media (prefers-reduced-motion: reduce) { .lp-morse { animation: none; } }
 .lp-minput { flex: 1; min-width: 0; font: 400 12.5px var(--font); color: var(--c-ink); background: var(--c-canvas); border: 0; border-radius: 10px;
   padding: 6px 10px; box-shadow: inset 0 0 0 1px var(--c-hair); outline: none; text-transform: uppercase; -webkit-user-select: text; user-select: text; }
 .lp-minput::placeholder { color: var(--c-ink3); }
@@ -438,7 +449,6 @@ section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hai
 .lp-schip.on { background: var(--c-soft); box-shadow: none; }
 .lp-schip button { display: inline-flex; align-items: center; gap: 5px; }
 .lp-schip .x { color: var(--c-ink3); }
-.lp-note { font-size: 11px; line-height: 1.3; color: var(--c-ink3); }
 
 /* Lid logo: drawn only by renderLogo() (script below). */
 /* Like the real lid: a polished mirror insert with a thin chamfer; light fills it from behind. */
@@ -480,41 +490,50 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
       <div class="panel" id="panel" aria-label="Try Lidlit">
         <div class="lp-head">
           <span class="lp-glyph" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6.4 2.4V14.6H14.6" stroke-width="2.2" opacity=".4"/><path d="M5.9 5.9V11.1" stroke-width="3.2"/></svg></span>
-          <div class="lp-t"><div class="lp-title">Lidlit<a class="lp-heart" href="/support/" title="Donate. Lidlit is free; if you like it, you can chip in." aria-label="Donate"><i data-i="heart" data-s="10"></i></a></div><div class="lp-status" id="st" aria-live="polite">Glowing at 60%</div></div>
+          <div class="lp-t"><div class="lp-title">Lidlit</div></div>
           <button class="lp-switch" id="power" data-act="power" role="switch" aria-checked="true" aria-label="Light"><span class="k"><i class="sun" data-i="sun.max.fill" data-s="11" data-w="bold"></i><i class="moon" data-i="moon.fill" data-s="10" data-w="bold"></i></span></button>
         </div>
-        <div class="lp-lid"><div class="lp-logo-wrap" id="glowf"><div class="lp-logo" id="logo"></div></div><span class="lp-lbl" id="lbl">STEADY</span></div>
+        <div class="lp-lid"><div class="lp-logo-wrap" id="glowf"><div class="lp-logo" id="logo"></div></div><span class="lp-lbl" id="lbl">GLOW</span></div>
         <div class="lp-modes">
-          <button class="lp-mode" data-act="mode" data-arg="steady" aria-pressed="true"><span class="ic"><i data-i="sun.max.fill" data-s="19"></i></span>Steady</button>
-          <button class="lp-mode" data-act="mode" data-arg="breathe" aria-pressed="false"><span class="ic"><i data-i="wind" data-s="19"></i></span>Breathe</button>
-          <button class="lp-mode" data-act="mode" data-arg="follow" aria-pressed="false"><span class="ic"><i data-i="display" data-s="19"></i></span>Follow</button>
+          <button class="lp-mode" data-act="mode" data-arg="steady" aria-pressed="true"><span class="ic"><i data-i="sun.max.fill" data-s="19"></i></span>Glow</button>
+          <button class="lp-mode" data-act="mode" data-arg="breathe" aria-pressed="false"><span class="ic"><i data-i="alternatingcurrent" data-s="19"></i></span>Pulse</button>
+          <button class="lp-ptile tip-w" data-act="tab" data-arg="notifications" aria-expanded="false" data-tip="Flash the logo when Claude, ChatGPT, mail or chat needs you"><span class="ic" id="bellic"></span>Alerts</button>
+          <button class="lp-ptile tip-r tip-w" data-act="tab" data-arg="morse" aria-expanded="false" data-tip="Spell a message on the logo"><span class="ic"><i data-i="dot.radiowaves.right" data-s="18"></i></span>Morse</button>
         </div>
         <div class="lp-bright" id="bright">
-          <div class="lp-srow"><i data-i="sun.min" data-s="14"></i><div class="lp-slider" id="lvl" role="slider" tabindex="0" aria-label="Brightness"></div><i data-i="sun.max" data-s="16"></i></div>
+          <div class="lp-srow" id="srow"><i data-i="sun.min" data-s="14"></i><div class="lp-slider" id="lvl" role="slider" tabindex="0" aria-label="Brightness"></div><i data-i="sun.max" data-s="16"></i></div>
           <div class="lp-arow">
-            <div class="lp-speed" id="speed" hidden><span>Speed</span><div>
+            <div class="lp-speed" id="speed" hidden><div>
               <button class="lp-pill light" data-act="speed" data-arg="7">Slow</button><button class="lp-pill light" data-act="speed" data-arg="4.5">Calm</button><button class="lp-pill light" data-act="speed" data-arg="2.5">Quick</button>
             </div></div>
+            <button class="lp-auto" id="follow" data-act="follow" role="switch" aria-checked="false" title="Brightness follows your screen, like macOS does">Follow screen <span class="lp-mini"></span></button>
             <span class="lp-sp"></span>
             <button class="lp-auto" id="auto" data-act="auto" role="switch" aria-checked="true" title="Dims the logo in a dark room">Auto-dim <span class="lp-mini on"></span></button>
           </div>
         </div>
-        <div class="lp-bar" role="tablist">
-          <button class="lp-tab" role="tab" data-act="tab" data-arg="settings" aria-selected="false"><i data-i="slider.horizontal.3" data-s="13" data-w="semibold"></i>Settings</button>
+        <div class="lp-morse" id="morse" hidden>
+          <div class="lp-col8">
+            <form class="lp-row6" id="mform"><input class="lp-minput" id="mtext" maxlength="24" value="HELLO" placeholder="TYPE A MESSAGE" aria-label="Message" autocomplete="off" autocapitalize="characters" spellcheck="false"><span id="msend"></span></form>
+            <div class="lp-mtrack" id="mtrack"></div>
+            <div class="lp-row6" id="mspeeds"></div>
+          </div>
+          <div class="lp-flow" id="saved" hidden title="Saved messages can also be a notification's signal"></div>
+        </div>
+        <div class="lp-card lp-notifs" id="d-notifications" hidden>
+          <div class="lp-srcs" id="srcs"></div>
+          <div class="lp-div"></div>
+          <div class="lp-flash"><span class="lp-ic18"><i data-i="sun.max" data-s="14"></i></span><span>Flash</span><div class="lp-slider" id="flash" role="slider" tabindex="0" aria-label="Flash brightness"></div></div>
+          <button class="lp-row" data-act="closedcues" role="switch" aria-checked="true"><span class="lp-ic18"><i data-i="laptopcomputer" data-s="17"></i></span><span class="lp-b">Show with the lid closed</span><span class="lp-sp"></span><span class="lp-mini on" id="closedcues"></span></button>
+        </div>
+        <div class="lp-bar">
+          <button class="lp-tab" data-act="tab" data-arg="settings" aria-expanded="false"><i data-i="slider.horizontal.3" data-s="13" data-w="semibold"></i>Settings</button>
           <span class="lp-sp"></span>
-          <button class="lp-tab" role="tab" data-act="tab" data-arg="notifications" aria-selected="true"><span id="bellic"></span>Notifications</button>
-          <span class="lp-sp"></span>
-          <button class="lp-tab" role="tab" data-act="tab" data-arg="morse" aria-selected="false"><i data-i="dot.radiowaves.right" data-s="13" data-w="semibold"></i>Morse</button>
+          <a class="lp-donate" href="/support/" title="Lidlit is free. If you like it, you can chip in."><i data-i="heart" data-s="13"></i>Donate</a>
         </div>
         <div class="lp-card" id="d-settings" hidden>
           <div class="lp-col8">
             <div class="lp-row"><span class="lp-label">Schedule</span><span class="lp-sp"></span><button class="lp-pill" data-act="add"><i data-i="plus" data-s="13" data-w="semibold"></i>Add</button></div>
             <div class="lp-col8" id="rules" hidden></div>
-          </div>
-          <div class="lp-div"></div>
-          <div class="lp-col">
-            <span class="lp-label">Lid closed</span>
-            <div class="lp-row"><span class="lp-ic18"><i data-i="laptopcomputer" data-s="17"></i></span><span class="lp-b">Keep the glow</span><button class="lp-onoff" id="keep" data-act="keep">Off</button></div>
           </div>
           <div class="lp-div"></div>
           <div class="lp-row6">
@@ -523,23 +542,6 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
             <button class="lp-pill" data-act="reset" title="Hand the logo back to macOS"><i data-i="arrow.counterclockwise" data-s="13" data-w="semibold"></i>Reset</button>
             <button class="lp-pill" data-act="quit" title="The logo keeps its current look after quitting"><i data-i="xmark" data-s="13" data-w="semibold"></i>Quit</button>
           </div>
-          <a class="lp-support" href="/support/" title="Lidlit is free. If you like it, you can chip in."><i data-i="heart" data-s="12"></i>Donate</a>
-        </div>
-        <div class="lp-card lp-notifs" id="d-notifications">
-          <div class="lp-srcs" id="srcs"></div>
-          <div class="lp-div"></div>
-          <div class="lp-flash"><span class="lp-ic18"><i data-i="sun.max" data-s="14"></i></span><span>Flash</span><div class="lp-slider" id="flash" role="slider" tabindex="0" aria-label="Flash brightness"></div></div>
-          <button class="lp-row" data-act="closedcues" role="switch" aria-checked="true"><span class="lp-ic18"><i data-i="laptopcomputer" data-s="17"></i></span><span class="lp-b">Show with the lid closed</span><span class="lp-sp"></span><span class="lp-mini on" id="closedcues"></span></button>
-        </div>
-        <div class="lp-card" id="d-morse" hidden>
-          <div class="lp-col8">
-            <span class="lp-label">Morse message</span>
-            <form class="lp-row6" id="mform"><input class="lp-minput" id="mtext" maxlength="24" value="HELLO" placeholder="TYPE A MESSAGE" aria-label="Message" autocomplete="off" autocapitalize="characters" spellcheck="false"><span id="msend"></span></form>
-            <div class="lp-mtrack" id="mtrack"></div>
-            <div class="lp-row6" id="mspeeds"></div>
-          </div>
-          <div class="lp-div" id="saved-div" hidden></div>
-          <div class="lp-col8" id="saved" hidden></div>
         </div>
       </div>
       <p class="hint">Try it. Tap a mode or drag the slider.</p>
@@ -549,16 +551,16 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
   <section id="modes">
     <div class="demo">
       <div class="text">
-        <h2>Glow, breathe, or rest.</h2>
+        <h2>Glow, pulse, or rest.</h2>
         <p class="muted">One switch, one slider. Softer in a dark room. Keeps glowing with the lid closed.</p>
       </div>
-      <div class="visual"><img class="shot" src="img/app-main.png" width="330" alt="Main panel with Steady selected"></div>
+      <div class="visual"><img class="shot" src="img/app-main.png" width="330" alt="Main panel with Glow selected"></div>
     </div>
   </section>
 
   <section>
     <div class="demo">
-      <div class="visual"><img class="shot" src="img/app-notifications.png" width="330" alt="Notifications: Claude, ChatGPT, Email, Chat and Scripts, each on or off with its own rhythm"></div>
+      <div class="visual"><img class="shot" src="img/app-notifications.png" width="330" alt="Alerts: Claude, ChatGPT, Email, Chat and Scripts, each on or off with its own rhythm"></div>
       <div class="text">
         <h2>Know at a glance.</h2>
         <p class="muted">Claude, ChatGPT, email and chat. Each gets its own rhythm.</p>
@@ -572,17 +574,17 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
         <h2>Or say it in Morse.</h2>
         <p class="muted">Type a message. The lid spells it out.</p>
       </div>
-      <div class="visual"><img class="shot" src="img/app-morse-menu.png" width="330" alt="Morse menu with a message and its dots and dashes"></div>
+      <div class="visual"><img class="shot" src="img/app-morse-menu.png" width="330" alt="Morse panel with a message and its dots and dashes"></div>
     </div>
   </section>
 
   <section id="faq">
     <h2 style="margin-bottom:22px">Questions</h2>
     <div class="faq">
-      <details><summary>What is Lidlit?</summary><p>A free menu bar app for macOS that controls the glowing Apple logo on the lid of a MacBook Pro XDR. It can glow steadily, breathe, follow your screen, blink when Claude, ChatGPT, email or chat needs you, and spell messages in Morse code.</p></details>
-      <details><summary>How much CPU does it use?</summary><p>None you can measure: 0.0 % at rest. While breathing, macOS does the fading itself (about 2 % in its own brightness service).</p></details>
+      <details><summary>What is Lidlit?</summary><p>A free menu bar app for macOS that controls the glowing Apple logo on the lid of a MacBook Pro XDR. It can glow steadily, pulse, follow your screen, blink when Claude, ChatGPT, email or chat needs you, and spell messages in Morse code.</p></details>
+      <details><summary>How much CPU does it use?</summary><p>None you can measure: 0.0 % at rest. While pulsing, macOS does the fading itself (about 2 % in its own brightness service).</p></details>
       <details><summary>Does it drain the battery?</summary><p>Lidlit itself barely does anything. The light uses a little power, like any LED, and less at lower brightness. Turn it off any time.</p></details>
-      <details><summary>Does it work with the lid closed?</summary><p>Yes. Turn on Keep the glow, or let only notifications flash.</p></details>
+      <details><summary>Does it work with the lid closed?</summary><p>Yes. With the lid closed, the laptop button on the lid preview keeps it glowing, and alerts can still flash on their own.</p></details>
       <details><summary>Which Macs?</summary><p>MacBook Pro XDR with a lit logo, macOS 14 or later.</p></details>
       <details><summary>Can it change color?</summary><p>No. The logo has a single white light, so signals use rhythm instead.</p></details>
       <details><summary>Does it read my email or messages?</summary><p>No. It only sees the unread count on an app's Dock icon, and only for apps you turn on. Nothing leaves your Mac.</p></details>
@@ -664,7 +666,7 @@ function renderLogo(level) {
     'sun.min': `<circle cx="12" cy="12" r="3.7"/><path d="${rays(6.6, 7.6)}"/>`,
     'moon.fill': '<path class="f" d="M19.8 14.6A8.3 8.3 0 0 1 9.4 4.2a8.3 8.3 0 1 0 10.4 10.4z"/>',
     'moon.zzz.fill': '<path class="f" d="M16.8 16.4A7 7 0 0 1 8 7.6a7 7 0 1 0 8.8 8.8z"/><path d="M13.5 3.5h3l-3 3.5h3M18 8.5h2.5L18 11.5h2.5"/>',
-    'wind': '<path d="M2.8 8.2h9.7a2.6 2.6 0 1 0-2.6-2.6M2.8 12.2h15.4a2.8 2.8 0 1 0-2.8-2.8M2.8 16.2h10.4a2.6 2.6 0 1 1-2.6 2.6"/>',
+    'alternatingcurrent': '<path d="M3 12c2.25-4.6 6.75-4.6 9 0s6.75 4.6 9 0"/>',
     'display': '<rect class="f" x="4.2" y="5.2" width="15.6" height="9.9" rx=".6" opacity=".45"/><rect x="3" y="4" width="18" height="12.3" rx="2"/><path d="M12 16.3v3.2M8.5 20h7"/>',
     'slider.horizontal.3': '<path d="M3 6h10.2M17.8 6H21M3 12h3.2M10.8 12H21M3 18h7.2M14.8 18H21"/><circle cx="15.5" cy="6" r="2.3"/><circle cx="8.5" cy="12" r="2.3"/><circle cx="12.5" cy="18" r="2.3"/>',
     'bell': `<path d="${bell}"/><path d="M10 20.8a2 2 0 0 0 4 0"/>`,
@@ -710,7 +712,7 @@ function renderLogo(level) {
   });
 
   // ---- Model (Engine.swift / NotificationSources.swift)
-  const MODES = { steady: 'Steady', breathe: 'Breathe', follow: 'Follow' };
+  const MODES = { steady: 'Glow', breathe: 'Pulse', follow: 'Glow' };
   const blink = (on, off) => [[1, .05, on], [0, .06, off]];
   const rep = (a, n) => Array(n).fill(a).flat();
   const PAT = {
@@ -738,7 +740,7 @@ function renderLogo(level) {
 
   const S = { on: true, mode: 'steady', lastOn: 'steady', level: 60, breath: 5, auto: true, drawer: '',
     live: { claude: true, email: true }, pattern: {}, cueMorse: {}, openCue: null, info: false, copied: false,
-    cueLevel: 100, cuesClosed: true, keepGlow: false, login: true, rules: [], unit: .25, saved: [] };
+    cueLevel: 100, cuesClosed: true, login: true, rules: [], unit: .25, saved: [] };
   const patternFor = c => S.pattern[c] || CUES[c].p;
   let P = null, cursor = null, shown = .6;   // what's playing, the Morse position, the level on the lid
 
@@ -758,11 +760,12 @@ function renderLogo(level) {
     return null;
   }
   function fire(cue, override) {
-    if (!override && S.cueMorse[cue]) return morse(S.cueMorse[cue]);
+    if (!override && S.cueMorse[cue]) return morse(S.cueMorse[cue], true);
     play(cue, null, [[0, .1, .15], ...PAT[override || patternFor(cue)].s], S.cueLevel / 100);
   }
-  // Standard timing: dot 1 unit, dash 3, gap 1, letter gap 3, word gap 7. Fixed 60 %, like the app.
-  function morse(text) {
+  // Standard timing: dot 1 unit, dash 3, gap 1, letter gap 3, word gap 7. Messages flash at the slider's
+  // level (at least 10 %), a notification's Morse at a fixed 60 %, like the app; then the logo returns to its mode.
+  function morse(text, asNotification) {
     const u = Math.min(.4, Math.max(.18, S.unit)), f = .05, chars = [...text.toUpperCase()];
     const steps = [[0, .1, .6]], marks = {}; let lastWasLetter = false;
     chars.forEach((ch, ci) => {
@@ -774,13 +777,14 @@ function renderLogo(level) {
       });
       steps[steps.length - 1][2] += 2 * u; lastWasLetter = true;
     });
-    if (steps.length > 1) play('morse', chars.join(''), steps, .6, marks);
+    const peak = asNotification ? .6 : Math.max(10, S.level) / 100;
+    if (steps.length > 1) play('morse', chars.join(''), steps, peak, marks);
   }
   function base(t) {
     if (!S.on) return 0;
     const L = S.level / 100 * (S.auto ? .85 : 1);
     if (S.mode === 'breathe') return L * (.5 - .5 * Math.cos(t * 2 * Math.PI / (2 * Math.max(.75, S.breath / 2))));
-    return S.mode === 'follow' ? L * .8 : L;
+    return S.mode === 'follow' ? .75 * (S.auto ? .85 : 1) : L;   // follows a typical screen brightness
   }
   function frame(ms) {
     const t = ms / 1000;
@@ -794,6 +798,7 @@ function renderLogo(level) {
       }
     }
     if (!P) shown += (base(t) - shown) * (S.mode === 'breathe' && S.on ? 1 : .12);
+    if (!P && Math.abs(base(t) - shown) < .002) shown = base(t);   // settle exactly, so a dark logo is really dark
     renderLogo(Math.max(0, shown));
     requestAnimationFrame(frame);
   }
@@ -817,56 +822,50 @@ function renderLogo(level) {
   const flashShow = slider($('flash'), 10, 100, () => S.cueLevel, v => { S.cueLevel = v; flashShow(); });
 
   // ---- Rendering
-  const status = () => {
-    if (P && P.id === 'morse') return 'Sending Morse: ' + P.note;
-    if (P) return 'Flashing: ' + CUES[P.id].t;
-    if (!S.on) return 'Resting in the dark';
-    if (S.mode === 'breathe') return `Breathing up to ${S.level}%, ${S.breath.toFixed(1)} s`;
-    if (S.mode === 'follow') return 'Following your screen';
-    return S.level < .5 ? 'Steady, dark' : `Glowing at ${S.level}%`;
-  };
   const pill = (act, arg, title, ic, cls = '') =>
     `<button class="lp-pill ${cls}" data-act="${act}"${arg != null ? ` data-arg="${esc(arg)}"` : ''}>${ic ? icon(ic, 13, 'semibold') : ''}${esc(title)}</button>`;
   const anyLive = () => SOURCES.some(s => S.live[s.id]);
 
   function render() {
-    $('st').textContent = status();
     $('lbl').textContent = P ? (P.id === 'morse' ? 'MORSE' : 'CUE') : S.on ? MODES[S.mode].toUpperCase() : 'OFF';
     $('power').setAttribute('aria-checked', S.on);
-    panel.querySelectorAll('.lp-mode').forEach(b => b.setAttribute('aria-pressed', S.on && b.dataset.arg === S.mode));
+    const glow = S.mode === 'steady' || S.mode === 'follow';
+    panel.querySelectorAll('.lp-mode').forEach(b => b.setAttribute('aria-pressed', S.on && (b.dataset.arg === S.mode || (b.dataset.arg === 'steady' && glow))));
+    $('follow').hidden = !(S.on && glow);
+    $('follow').setAttribute('aria-checked', S.mode === 'follow');
+    $('follow').lastElementChild.classList.toggle('on', S.mode === 'follow');
+    $('srow').hidden = S.on && S.mode === 'follow';
     $('bright').hidden = !S.on;
     const br = S.on && S.mode === 'breathe';
     $('speed').hidden = !br;
     $('speed').querySelectorAll('button').forEach(b => b.classList.toggle('on', Math.abs(S.breath - b.dataset.arg) < 1));
-    $('auto').classList.toggle('low', br);
     $('auto').setAttribute('aria-checked', S.auto);
     $('auto').lastElementChild.classList.toggle('on', S.auto);
     lvlShow(); flashShow();
-    $('bellic').innerHTML = icon(anyLive() ? 'bell' : 'bell.slash', 13, 'semibold');
-    panel.querySelectorAll('.lp-tab').forEach(b => {
-      const open = b.dataset.arg === S.drawer;
-      b.setAttribute('aria-selected', open);
-      const d = $('d-' + b.dataset.arg); if (d.hidden === open) d.hidden = !open;
+    $('bellic').innerHTML = icon(anyLive() ? 'bell' : 'bell.slash', 18);
+    // One menu open at a time: Alerts and Morse (tiles) or Settings (bottom bar). None of them changes the light.
+    panel.querySelectorAll('[data-act="tab"]').forEach(b => b.setAttribute('aria-expanded', b.dataset.arg === S.drawer));
+    [['settings', 'd-settings'], ['notifications', 'd-notifications'], ['morse', 'morse']].forEach(([k, id]) => {
+      const open = k === S.drawer, d = $(id); if (d.hidden === open) d.hidden = !open;
     });
     renderSettings(); renderSources(); renderMorse();
   }
 
   function renderSettings() {
-    $('keep').className = 'lp-onoff' + (S.keepGlow ? ' on' : ''); $('keep').textContent = S.keepGlow ? 'On' : 'Off';
     $('login').className = 'lp-pill' + (S.login ? ' on' : '');
     $('login').innerHTML = icon(S.login ? 'checkmark' : 'power', 13, 'semibold') + 'At login';
     const rules = $('rules'); rules.hidden = !S.rules.length;
     const chip = (i, act, arg, ic, on, title) =>
-      `<button class="lp-ichip${on ? ' on' : ''}" data-act="${act}" data-arg="${i}${arg != null ? ':' + arg : ''}" title="${title}">${icon(ic, 13)}</button>`;
+      `<button class="lp-ichip${on ? ' on' : ''}" data-act="${act}" data-arg="${i}${arg != null ? ':' + arg : ''}" aria-label="${title}" data-tip="${title}">${icon(ic, 13)}</button>`;
     rules.innerHTML = S.rules.map((r, i) => `<div class="lp-rule${r.on ? '' : ' off'}">
       <div class="lp-row6"><button data-act="rule-on" data-arg="${i}" aria-label="Use this window"><span class="lp-mini${r.on ? ' on' : ''}"></span></button>
         <input class="lp-time" type="time" value="${r.start}" data-rule="${i}" data-k="start" aria-label="From"><span class="lp-dash">–</span>
         <input class="lp-time" type="time" value="${r.end}" data-rule="${i}" data-k="end" aria-label="To"><span class="lp-sp"></span>
         <button class="lp-trash" data-act="rule-del" data-arg="${i}" title="Remove this window">${icon('trash', 13)}</button></div>
-      <div class="lp-row6" style="gap:4px">${chip(i, 'rule-mode', '', 'equal', r.mode === '', 'Keep mode')}${
-        [['off', 'moon.zzz.fill', 'Off'], ['steady', 'sun.max.fill', 'Steady'], ['breathe', 'wind', 'Breathe'], ['follow', 'display', 'Follow screen']]
+      <div class="lp-row6" style="gap:4px">${chip(i, 'rule-mode', '', 'equal', r.mode === '', 'Keep the current mode')}${
+        [['off', 'moon.zzz.fill', 'Logo off'], ['steady', 'sun.max.fill', 'Glow'], ['breathe', 'alternatingcurrent', 'Pulse'], ['follow', 'display', 'Glow, following the screen']]
           .map(([m, ic, t]) => chip(i, 'rule-mode', m, ic, r.mode === m, t)).join('')}<span class="lp-sp"></span>${
-        chip(i, 'rule-mute', null, r.mute ? 'bell.slash.fill' : 'bell', r.mute, r.mute ? 'Cues muted' : 'Cues on')}</div></div>`).join('');
+        chip(i, 'rule-mute', null, r.mute ? 'bell.slash.fill' : 'bell', r.mute, r.mute ? 'Notifications muted during this time' : 'Notifications on during this time')}</div></div>`).join('');
   }
 
   function renderSources() {
@@ -910,20 +909,22 @@ function renderLogo(level) {
     const playing = P && P.id === 'morse', text = mtext.value.trim().toUpperCase();
     $('msend').innerHTML = playing ? pill('stop', null, 'Stop', 'stop.fill') : pill('send', null, 'Send', 'dot.radiowaves.right', 'pro');
     renderTrack();
-    $('mspeeds').innerHTML = [['Slow', .35], ['Normal', .25], ['Fast', .18]].map(([t, u]) => pill('unit', u, t, null, Math.abs(S.unit - u) < .03 ? 'on' : '')).join('')
-      + '<span class="lp-sp"></span>' + pill('save', null, 'Save', S.saved.includes(text) ? 'bookmark.fill' : 'bookmark');
+    $('mtrack').hidden = !(playing || text);
+    $('mspeeds').innerHTML = [['Slow', .35], ['Normal', .25], ['Fast', .18]].map(([t, u]) => pill('unit', u, t, null, 'light' + (Math.abs(S.unit - u) < .03 ? ' on' : ''))).join('')
+      + '<span class="lp-sp"></span>' + pill('save', null, 'Save', S.saved.includes(text) ? 'bookmark.fill' : 'bookmark', 'light');
     $('mspeeds').lastElementChild.title = 'Keep this message to send again or use as a notification';
-    $('saved').hidden = $('saved-div').hidden = !S.saved.length;
-    $('saved').innerHTML = `<span class="lp-label">Saved messages</span><div class="lp-flow">${S.saved.map((t, i) => {
+    $('saved').hidden = !S.saved.length;
+    $('saved').innerHTML = S.saved.map((t, i) => {
       const on = playing && P.note === t;
       return `<span class="lp-schip${on ? ' on' : ''}"><button data-act="ssend" data-arg="${i}" title="Send on the logo">${icon(on ? 'light.max' : 'play.fill', 11, 'bold')}${esc(t)}</button><button class="x" data-act="sdel" data-arg="${i}" title="Remove">${icon('xmark', 10, 'bold')}</button></span>`;
-    }).join('')}</div><p class="lp-note">Saved messages can also be a notification's signal (Notifications › tap a row).</p>`;
+    }).join('');
   }
 
   // ---- Actions
   const act = {
     power: () => { if (S.on) { S.lastOn = S.mode; S.on = false; } else { S.on = true; S.mode = S.lastOn; } },
-    mode: m => { S.mode = S.lastOn = m; S.on = true; },
+    mode: m => { if (m === 'steady' && (S.mode === 'steady' || S.mode === 'follow') && S.on) return; S.mode = S.lastOn = m === 'steady' && S.glowFollows ? 'follow' : m; S.on = true; },
+    follow: () => { S.glowFollows = S.mode !== 'follow'; S.mode = S.lastOn = S.glowFollows ? 'follow' : 'steady'; },
     speed: v => { S.breath = +v; },
     auto: () => { S.auto = !S.auto; },
     tab: t => { S.drawer = S.drawer === t ? '' : t; S.info = false; },
@@ -932,7 +933,6 @@ function renderLogo(level) {
     'rule-del': i => { S.rules.splice(i, 1); },
     'rule-mode': a => { const [i, m] = a.split(':'); S.rules[i].mode = m; },
     'rule-mute': i => { S.rules[i].mute = !S.rules[i].mute; },
-    keep: () => { S.keepGlow = !S.keepGlow; },
     login: () => { S.login = !S.login; },
     reset: () => { P = null; S.on = true; S.mode = S.lastOn = 'follow'; S.level = 100; S.auto = true; },
     quit: () => {},   // nothing to quit on a web page; the logo would keep its current look anyway
@@ -951,7 +951,7 @@ function renderLogo(level) {
     ssend: i => { mtext.value = S.saved[i]; morse(S.saved[i]); },
     sdel: i => { const t = S.saved[i]; S.saved.splice(i, 1); for (const c in S.cueMorse) if (S.cueMorse[c] === t) delete S.cueMorse[c]; },
   };
-  // Invite a first tap once the panel is in view: a soft ring on Breathe, three times, then never again.
+  // Invite a first tap once the panel is in view: a soft ring on Pulse, three times, then never again.
   (() => {
     let done = false;
     const stopInvite = () => { done = true; panel.querySelectorAll('.invite').forEach(el => el.classList.remove('invite')); };
