@@ -3,13 +3,174 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Lidlit</title>
-<meta name="description" content="Lidlit makes the glowing logo on your MacBook Pro lid useful: a quiet glow while you work, a blink when Claude is done or mail arrives.">
-<meta property="og:title" content="Lidlit">
-<meta property="og:description" content="Your lid, lit.">
-<meta property="og:image" content="https://lidlit.app/img/icon.png">
-<link rel="icon" type="image/png" href="img/icon.png">
-<link rel="apple-touch-icon" href="img/icon.png">
+<title>Lidlit – the glowing Apple logo on your MacBook Pro lid, made useful</title>
+<meta name="description" content="Lidlit is a free macOS menu bar app that controls the glowing Apple logo on your MacBook Pro lid: a steady glow, breathing, or a blink when Claude, ChatGPT, email or chat needs you. Free download.">
+<link rel="canonical" href="https://lidlit.app/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#000000">
+<meta name="application-name" content="Lidlit">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lidlit">
+<meta property="og:url" content="https://lidlit.app/">
+<meta property="og:title" content="Lidlit – Your lid, lit.">
+<meta property="og:description" content="The glowing logo on your MacBook Pro lid, made useful. A quiet glow while you work, a blink when Claude is done. Free for macOS.">
+<meta property="og:image" content="https://lidlit.app/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Lidlit: Your lid, lit. The Lidlit menu bar panel with a lit logo preview.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lidlit – Your lid, lit.">
+<meta name="twitter:description" content="The glowing logo on your MacBook Pro lid, made useful. Free for macOS.">
+<meta name="twitter:image" content="https://lidlit.app/img/og.png">
+<meta name="twitter:image:alt" content="Lidlit: Your lid, lit.">
+<link rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="text/markdown" href="/llms.txt" title="Lidlit for AI assistants">
+<script type="application/ld+json">
+[
+ {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Lidlit",
+  "alternateName": "Lidlight",
+  "description": "Lidlit is a free macOS menu bar app that controls the glowing Apple logo on your MacBook Pro lid: a steady glow, breathing, or a blink when Claude, ChatGPT, email or chat needs you.",
+  "url": "https://lidlit.app/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "macOS 14 or later (MacBook Pro XDR with a lit logo, Apple silicon)",
+  "softwareVersion": "1.0",
+  "downloadUrl": "https://github.com/Lafsen/lidlit-site/releases/latest/download/Lidlit.dmg",
+  "fileSize": "1.6MB",
+  "image": "https://lidlit.app/img/icon-512.png",
+  "screenshot": [
+   "https://lidlit.app/img/app-main.png",
+   "https://lidlit.app/img/app-notifications.png",
+   "https://lidlit.app/img/app-morse-menu.png"
+  ],
+  "offers": {
+   "@type": "Offer",
+   "price": "0",
+   "priceCurrency": "USD"
+  },
+  "featureList": [
+   "Steady glow, breathing, or follow the screen brightness",
+   "Auto-dim to room light",
+   "Blink when Claude Code or Codex finishes or needs you",
+   "Blink for new email and chat messages",
+   "Morse code messages",
+   "Schedule",
+   "Keeps glowing with the lid closed",
+   "Command-line tool and URL scheme"
+  ]
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Lidlit",
+  "alternateName": [
+   "Lidlight",
+   "lidlit.app"
+  ],
+  "url": "https://lidlit.app/"
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+   {
+    "@type": "Question",
+    "name": "What is Lidlit?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "A free menu bar app for macOS that controls the glowing Apple logo on the lid of a MacBook Pro XDR. It can glow steadily, breathe, follow your screen, blink when Claude, ChatGPT, email or chat needs you, and spell messages in Morse code."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "How much CPU does it use?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "None you can measure: 0.0 % at rest. While breathing, macOS does the fading itself (about 2 % in its own brightness service)."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "Does it drain the battery?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Lidlit itself barely does anything. The light uses a little power, like any LED, and less at lower brightness. Turn it off any time."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "Does it work with the lid closed?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Yes. Turn on Keep the glow, or let only notifications flash."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "Which Macs?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "MacBook Pro XDR with a lit logo, macOS 14 or later."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "Can it change color?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "No. The logo has a single white light, so signals use rhythm instead."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "Does it read my email or messages?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "No. It only sees the unread count on an app's Dock icon, and only for apps you turn on. Nothing leaves your Mac."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "Can I undo it?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Yes. Reset hands the light back to macOS, and quitting leaves it as it is."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "Is it on the Mac App Store?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "No. The App Store doesn't allow apps that drive the logo light, so Lidlit is a direct download from this site."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "Is it free?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Yes, and it stays free. If you'd like to chip in anyway, you can support Lidlit."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "Why the security prompt on first launch?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "The app isn't notarized yet. Open System Settings › Privacy & Security and click Open Anyway, once."
+    }
+   }
+  ]
+ }
+]
+</script>
 <style>
 /* Night page: black and white only. The word "lid" is the light — every demo drives it. */
 :root {
@@ -249,6 +410,7 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
   <section id="faq">
     <h2 style="margin-bottom:22px">Questions</h2>
     <div class="faq">
+      <details><summary>What is Lidlit?</summary><p>A free menu bar app for macOS that controls the glowing Apple logo on the lid of a MacBook Pro XDR. It can glow steadily, breathe, follow your screen, blink when Claude, ChatGPT, email or chat needs you, and spell messages in Morse code.</p></details>
       <details><summary>How much CPU does it use?</summary><p>None you can measure: 0.0 % at rest. While breathing, macOS does the fading itself (about 2 % in its own brightness service).</p></details>
       <details><summary>Does it drain the battery?</summary><p>Lidlit itself barely does anything. The light uses a little power, like any LED, and less at lower brightness. Turn it off any time.</p></details>
       <details><summary>Does it work with the lid closed?</summary><p>Yes. Turn on Keep the glow, or let only notifications flash.</p></details>
@@ -256,6 +418,8 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
       <details><summary>Can it change color?</summary><p>No. The logo has a single white light, so signals use rhythm instead.</p></details>
       <details><summary>Does it read my email or messages?</summary><p>No. It only sees the unread count on an app's Dock icon, and only for apps you turn on. Nothing leaves your Mac.</p></details>
       <details><summary>Can I undo it?</summary><p>Yes. Reset hands the light back to macOS, and quitting leaves it as it is.</p></details>
+      <details><summary>Is it on the Mac App Store?</summary><p>No. The App Store doesn't allow apps that drive the logo light, so Lidlit is a direct download from this site.</p></details>
+      <details><summary>Is it free?</summary><p>Yes, and it stays free. If you'd like to chip in anyway, you can <a href="/support/">support Lidlit</a>.</p></details>
       <details><summary>Why the security prompt on first launch?</summary><p>The app isn't notarized yet. Open System Settings › Privacy &amp; Security and click Open Anyway, once.</p></details>
     </div>
   </section>
@@ -273,6 +437,7 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
     <span>Lidlit 1.0</span>
     <span>Lives in your menu bar · 0 % CPU when idle</span>
     <span>Not affiliated with Apple.</span>
+    <a href="/support/" style="color:inherit">Support</a>
   </footer>
 </div>
 
