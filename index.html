@@ -456,7 +456,7 @@ section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hai
 .lp-logo { position: relative; width: 30px; height: 36px; }
 .lp-logo i { position: absolute; inset: 0; -webkit-mask: url(img/logo-mask.png) center / contain no-repeat; mask: url(img/logo-mask.png) center / contain no-repeat; }
 .lp-logo .edge { inset: -.8px; background: rgba(0,0,0,.28); filter: blur(.35px); }
-.lp-logo .mirror { background: linear-gradient(#858585, #b3b3b3); }
+.lp-logo .mirror { background: linear-gradient(#383838, #666); }
 .lp-logo .light { background: #fff; opacity: 0; }
 
 /* Download */
@@ -644,7 +644,7 @@ function renderLogo(level) {
   // Whiteness rises over the whole range and the glow mostly arrives in the top half,
   // so 50 % and 100 % look clearly different.
   const light = .15 + .85 * Math.pow(Math.min(1, duty / 85), .4), glow = bloom * bloom;
-  logo.querySelector('.light').style.opacity = x > 0 ? light.toFixed(3) : 0;
+  logo.querySelector('.light').style.opacity = x > .01 ? light.toFixed(3) : 0;
   const a = ((.15 + .75 * glow) * fill).toFixed(3);
   wrap.style.filter = x > 0 ? `drop-shadow(0 0 ${(1 + 5 * glow).toFixed(1)}px rgba(255,255,255,${a}))` : 'none';
 }
