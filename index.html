@@ -284,7 +284,9 @@ section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hai
 .lp-head { display: flex; align-items: center; gap: 10px; }
 .lp-glyph { width: 34px; height: 34px; border-radius: 50%; background: var(--c-hair); display: grid; place-items: center; flex: none; color: var(--c-ink); }
 .lp-t { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
-.lp-title { font-size: 17px; font-weight: 600; }
+.lp-title { font-size: 17px; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+.lp-heart { display: inline-flex; width: 16px; height: 16px; align-items: center; justify-content: center; color: var(--c-ink3); opacity: .6; }
+.lp-heart:hover { opacity: 1; color: var(--c-ink2); }
 .lp-status { font-size: 11.5px; color: var(--c-ink2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* Switches (GlowSwitch 40×23 with a symbol in the knob, MiniSwitch 30×18) */
@@ -472,7 +474,7 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
       <div class="panel" id="panel" aria-label="Try Lidlit">
         <div class="lp-head">
           <span class="lp-glyph" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6.4 2.4V14.6H14.6" stroke-width="2.2" opacity=".4"/><path d="M5.9 5.9V11.1" stroke-width="3.2"/></svg></span>
-          <div class="lp-t"><div class="lp-title">Lidlit</div><div class="lp-status" id="st" aria-live="polite">Glowing at 60%</div></div>
+          <div class="lp-t"><div class="lp-title">Lidlit<a class="lp-heart" href="/support/" title="Donate. Lidlit is free; if you like it, you can chip in." aria-label="Donate"><i data-i="heart" data-s="10"></i></a></div><div class="lp-status" id="st" aria-live="polite">Glowing at 60%</div></div>
           <button class="lp-switch" id="power" data-act="power" role="switch" aria-checked="true" aria-label="Light"><span class="k"><i class="sun" data-i="sun.max.fill" data-s="11" data-w="bold"></i><i class="moon" data-i="moon.fill" data-s="10" data-w="bold"></i></span></button>
         </div>
         <div class="lp-lid"><div class="lp-logo-wrap" id="glowf"><div class="lp-logo" id="logo"></div></div><span class="lp-lbl" id="lbl">STEADY</span></div>
@@ -515,7 +517,7 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
             <button class="lp-pill" data-act="reset" title="Hand the logo back to macOS"><i data-i="arrow.counterclockwise" data-s="13" data-w="semibold"></i>Reset</button>
             <button class="lp-pill" data-act="quit" title="The logo keeps its current look after quitting"><i data-i="xmark" data-s="13" data-w="semibold"></i>Quit</button>
           </div>
-          <a class="lp-support" href="/support/" title="Lidlit is free. If you like it, you can chip in."><i data-i="heart" data-s="12"></i>Support Lidlit</a>
+          <a class="lp-support" href="/support/" title="Lidlit is free. If you like it, you can chip in."><i data-i="heart" data-s="12"></i>Donate</a>
         </div>
         <div class="lp-card lp-notifs" id="d-notifications">
           <div class="lp-srcs" id="srcs"></div>
