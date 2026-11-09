@@ -1,0 +1,24 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>Lidlit</title>
+        <item>
+            <title>1.1</title>
+            <pubDate>Mon, 09 Nov 2026 06:17:47 +0100</pubDate>
+            <link>https://lidlit.app</link>
+            <sparkle:version>11</sparkle:version>
+            <sparkle:shortVersionString>1.1</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <sparkle:hardwareRequirements>arm64</sparkle:hardwareRequirements>
+            <description><![CDATA[<ul>
+<li>Glow, Pulse, Alerts and Morse, with Follow screen inside Glow.</li>
+<li>With the lid closed, the slider, Pulse and alerts now all work.</li>
+<li>A more realistic lid preview.</li>
+<li>Updates arrive by themselves (Settings › Auto-update).</li>
+<li>A clear message on Macs without a lit logo.</li>
+</ul>
+]]></description>
+            <enclosure url="https://github.com/Lafsen/lidlit-site/releases/download/v1.1/Lidlit-1.1.dmg" length="2797933" type="application/octet-stream" sparkle:edSignature="4Yjb6D6O7bgTLqqkn+tHCmcFxFo9ZmdnIC/hMzVdxup6Phcy/aKgOhzRcXdsUbMVy2/gQTZFBM2t5smTl2EUAg=="/>
+        </item>
+    </channel>
+</rss>
