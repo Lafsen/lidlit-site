@@ -294,11 +294,11 @@ section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hai
 .panel [hidden] { display: none !important; }
 /* Instant tooltips for icon-only controls. */
 .panel [data-tip] { position: relative; }
-.panel [data-tip]:hover::after, .panel [data-tip]:focus-visible::after { content: attr(data-tip); position: absolute; left: 50%; bottom: calc(100% + 6px); transform: translateX(-50%);
+@media (hover: hover) { .panel [data-tip]:hover::after, .panel [data-tip]:focus-visible::after { content: attr(data-tip); position: absolute; left: 50%; bottom: calc(100% + 6px); transform: translateX(-50%);
   white-space: nowrap; padding: 4px 8px; border-radius: 6px; background: #3a3a3c; color: #f5f5f7; font-size: 11px; font-weight: 400; line-height: 1.2;
-  box-shadow: 0 2px 8px rgba(0,0,0,.4); pointer-events: none; z-index: 5; }
+  box-shadow: 0 2px 8px rgba(0,0,0,.4); pointer-events: none; z-index: 5; } }
 .panel .lp-row6 > [data-tip]:last-child:hover::after, .panel [data-tip].tip-r:hover::after, .panel [data-tip].tip-r:focus-visible::after { left: auto; right: 0; transform: none; }
-.panel [data-tip].tip-w:hover::after, .panel [data-tip].tip-w:focus-visible::after { white-space: normal; width: max-content; max-width: 200px; text-align: left; }
+@media (hover: hover) { .panel [data-tip].tip-w:hover::after, .panel [data-tip].tip-w:focus-visible::after { white-space: normal; width: max-content; max-width: 200px; text-align: left; } }
 .lp-i { display: block; flex: none; fill: none; stroke: currentColor; stroke-width: var(--sw, 1.6); stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
 .lp-i .f { fill: currentColor; stroke: none; }
 .lp-i text { fill: currentColor; stroke: none; font: 800 9.5px var(--font); letter-spacing: -.2px; }
@@ -475,6 +475,10 @@ section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hai
 .lp-logo .mirror { background: linear-gradient(#383838, #666); }
 .lp-logo .light { background: #fff; opacity: 0; }
 
+@media (pointer: coarse) {
+  .panel button, .panel input, .brew { touch-action: manipulation; }
+  .panel .lp-minput { font-size: 16px; }
+}
 /* Download */
 .download { text-align: center; display: grid; justify-items: center; gap: 14px; }
 .brew { background: none; border: 0; padding: 4px 8px; font: inherit; font-size: .85rem; color: var(--ink-2); cursor: pointer; border-radius: 8px; }
@@ -837,7 +841,8 @@ function renderLogo(level) {
     const at = e => { const r = el.getBoundingClientRect(), p = Math.min(1, Math.max(0, (e.clientX - r.left - 9 * r.width / el.offsetWidth) / Math.max(1, r.width * (1 - 18 / el.offsetWidth))));
       set(Math.round(min + p * (max - min))); };
     el.addEventListener('pointerdown', e => { el.setPointerCapture(e.pointerId); at(e); el.onpointermove = at; });
-    el.addEventListener('pointerup', () => { el.onpointermove = null; });
+    const end = () => { el.onpointermove = null; };
+    el.addEventListener('pointerup', end); el.addEventListener('pointercancel', end);
     el.addEventListener('keydown', e => {
       const d = { ArrowRight: 1, ArrowUp: 1, ArrowLeft: -1, ArrowDown: -1, PageUp: 10, PageDown: -10 }[e.key];
       if (d) { e.preventDefault(); set(Math.min(max, Math.max(min, get() + d))); }
@@ -1030,7 +1035,9 @@ function renderLogo(level) {
   items.forEach((d, i) => cols[i % 2].appendChild(d)); })();
 </script>
 <!-- Visitor counts: GoatCounter, no cookies, no personal data. -->
-<script data-goatcounter="https://lidlit.goatcounter.com/count" async src="https://gc.zgo.at/count.js">document.querySelector('.brew').addEventListener('click',e=>{const b=e.currentTarget;navigator.clipboard?.writeText('brew install --cask lafsen/tap/lidlit').then(()=>{b.classList.add('copied');setTimeout(()=>b.classList.remove('copied'),1600)})});
+<script>
+document.querySelector('.brew').addEventListener('click',e=>{const b=e.currentTarget;navigator.clipboard?.writeText('brew install --cask lafsen/tap/lidlit').then(()=>{b.classList.add('copied');setTimeout(()=>b.classList.remove('copied'),1600)})});
 </script>
+<script data-goatcounter="https://lidlit.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
