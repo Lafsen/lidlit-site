@@ -2,7 +2,8 @@
 
 > Lidlit is a free macOS menu bar app that controls the glowing Apple logo on the lid of a MacBook Pro XDR. It turns the lid light into a quiet status light: a steady glow, a slow pulse, or a blink when Claude, ChatGPT, email or chat needs you. Website: https://lidlit.app (formerly Lidlight, lidlight.app).
 
-- Download (free, 1.6 MB DMG): https://github.com/Lafsen/lidlit-site/releases/latest/download/Lidlit.dmg
+- Download (free, 2.8 MB DMG): https://github.com/Lafsen/lidlit-site/releases/latest/download/Lidlit.dmg
+- Homebrew: `brew install --cask lafsen/tap/lidlit`
 - Requirements: MacBook Pro XDR with a lit logo, macOS 14 or later, Apple silicon.
 - Not on the Mac App Store: the App Store doesn't allow apps that drive the logo light. It's signed with an Apple Developer ID and notarized by Apple, so it opens without warnings.
 - Price: free. Optional donations: https://lidlit.app/support/

@@ -164,7 +164,7 @@
     "name": "Is it on the Mac App Store?",
     "acceptedAnswer": {
      "@type": "Answer",
-     "text": "No. The App Store doesn't allow apps that drive the logo light, so Lidlit is a direct download from this site."
+     "text": "No. The App Store doesn't allow apps that drive the logo light, so Lidlit is a direct download from this site, or with Homebrew: brew install --cask lafsen/tap/lidlit."
     }
    },
    {
@@ -477,6 +477,10 @@ section { padding-block: clamp(50px, 8vw, 90px); border-top: 1px solid var(--hai
 
 /* Download */
 .download { text-align: center; display: grid; justify-items: center; gap: 14px; }
+.brew { background: none; border: 0; padding: 4px 8px; font: inherit; font-size: .85rem; color: var(--ink-2); cursor: pointer; border-radius: 8px; }
+.brew code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .82rem; }
+.brew:hover { background: var(--hair); }
+.brew.copied code::after { content: "  ✓ copied"; color: var(--ink-3); font-family: -apple-system, "SF Pro Text", sans-serif; }
 .steps { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; color: var(--ink-2); font-size: .92rem; }
 .steps b { color: var(--ink); font-weight: 600; margin-right: 4px; }
 footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: flex; gap: 18px; flex-wrap: wrap;
@@ -609,7 +613,7 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
       <details><summary>Can it change color?</summary><p>No. The logo has a single white light, so signals use rhythm instead.</p></details>
       <details><summary>Does it read my email or messages?</summary><p>No. It only sees the unread count on an app's Dock icon, and only for apps you turn on. None of it leaves your Mac.</p></details>
       <details><summary>Can I undo it?</summary><p>Yes. Reset hands the light back to macOS, and quitting leaves it as it is.</p></details>
-      <details><summary>Is it on the Mac App Store?</summary><p>No. The App Store doesn't allow apps that drive the logo light, so Lidlit is a direct download from this site.</p></details>
+      <details><summary>Is it on the Mac App Store?</summary><p>No. The App Store doesn't allow apps that drive the logo light, so Lidlit is a direct download from this site, or with Homebrew: <code>brew install --cask lafsen/tap/lidlit</code>.</p></details>
       <details><summary>Is it free?</summary><p>Yes, and it stays free. If you'd like to chip in anyway, you can <a href="/support/">support Lidlit</a>.</p></details>
       <details><summary>Is it safe to install?</summary><p>Yes. Lidlit is signed with an Apple Developer ID and notarized by Apple, so it opens like any other Mac app. The only thing it ever contacts is lidlit.app, about once a day, to see if there is a new version (sending only its version number). You can switch that off in Settings.</p></details>
     </div>
@@ -621,11 +625,12 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
       <h2>Get Lidlit.</h2>
       <p class="muted">Free. For MacBook Pro XDR.</p>
       <a class="btn" href="https://github.com/Lafsen/lidlit-site/releases/latest/download/Lidlit.dmg" data-goatcounter-click="download">Download</a>
+      <button class="brew" type="button" title="Copy" data-goatcounter-click="brew-copy"><span class="muted">or</span> <code>brew install --cask lafsen/tap/lidlit</code></button>
     </div>
   </section>
 
   <footer>
-    <span>Lidlit 1.0</span>
+    <span>Lidlit 1.1</span>
     <span>Lives in your menu bar · 0 % CPU when idle</span>
     <span>Not affiliated with Apple.</span>
     <a href="/support/" style="color:inherit">Support</a>
@@ -1025,6 +1030,7 @@ function renderLogo(level) {
   items.forEach((d, i) => cols[i % 2].appendChild(d)); })();
 </script>
 <!-- Visitor counts: GoatCounter, no cookies, no personal data. -->
-<script data-goatcounter="https://lidlit.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://lidlit.goatcounter.com/count" async src="https://gc.zgo.at/count.js">document.querySelector('.brew').addEventListener('click',e=>{const b=e.currentTarget;navigator.clipboard?.writeText('brew install --cask lafsen/tap/lidlit').then(()=>{b.classList.add('copied');setTimeout(()=>b.classList.remove('copied'),1600)})});
+</script>
 </body>
 </html>
