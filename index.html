@@ -40,7 +40,7 @@
   "url": "https://lidlit.app/",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "macOS 14 or later (MacBook Pro XDR with a lit logo, Apple silicon)",
-  "softwareVersion": "1.0",
+  "softwareVersion": "1.1",
   "downloadUrl": "https://github.com/Lafsen/lidlit-site/releases/latest/download/Lidlit.dmg",
   "fileSize": "1.6MB",
   "image": "https://lidlit.app/img/icon-512.png",
@@ -148,7 +148,7 @@
     "name": "Does it read my email or messages?",
     "acceptedAnswer": {
      "@type": "Answer",
-     "text": "No. It only sees the unread count on an app's Dock icon, and only for apps you turn on. Nothing leaves your Mac."
+     "text": "No. It only sees the unread count on an app's Dock icon, and only for apps you turn on. None of it leaves your Mac."
     }
    },
    {
@@ -180,7 +180,7 @@
     "name": "Is it safe to install?",
     "acceptedAnswer": {
      "@type": "Answer",
-     "text": "Yes. Lidlit is signed with an Apple Developer ID and notarized by Apple, so it opens like any other Mac app. It runs on your Mac only and sends nothing anywhere."
+     "text": "Yes. Lidlit is signed with an Apple Developer ID and notarized by Apple, so it opens like any other Mac app. The only thing it ever contacts is lidlit.app, about once a day, to see if there is a new version (sending only its version number). You can switch that off in Settings."
     }
    }
   ]
@@ -557,7 +557,7 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
           <div class="lp-row6" style="padding: 0 2px">
             <button class="lp-pill on" id="login" data-act="login" title="Start Lidlit when you log in"></button>
             <span class="lp-sp"></span>
-            <button class="lp-pill" data-act="reset" title="Hand the logo back to macOS"><i data-i="arrow.counterclockwise" data-s="13" data-w="semibold"></i>Reset</button>
+            <button class="lp-pill on" id="autoup" data-act="autoup"></button>
             <button class="lp-pill" data-act="quit" title="The logo keeps its current look after quitting"><i data-i="xmark" data-s="13" data-w="semibold"></i>Quit</button>
           </div>
         </div>
@@ -607,11 +607,11 @@ footer { border-top: 1px solid var(--hair); padding-block: 26px 40px; display: f
       <details><summary>Does it work with the lid closed?</summary><p>Yes. With the lid closed, the laptop button on the lid preview keeps it glowing, and the slider, Pulse and alerts all still work there. Alerts can also flash on their own while the rest stays dark.</p></details>
       <details><summary>Which Macs?</summary><p>MacBook Pro XDR with a lit logo, macOS 14 or later.</p></details>
       <details><summary>Can it change color?</summary><p>No. The logo has a single white light, so signals use rhythm instead.</p></details>
-      <details><summary>Does it read my email or messages?</summary><p>No. It only sees the unread count on an app's Dock icon, and only for apps you turn on. Nothing leaves your Mac.</p></details>
+      <details><summary>Does it read my email or messages?</summary><p>No. It only sees the unread count on an app's Dock icon, and only for apps you turn on. None of it leaves your Mac.</p></details>
       <details><summary>Can I undo it?</summary><p>Yes. Reset hands the light back to macOS, and quitting leaves it as it is.</p></details>
       <details><summary>Is it on the Mac App Store?</summary><p>No. The App Store doesn't allow apps that drive the logo light, so Lidlit is a direct download from this site.</p></details>
       <details><summary>Is it free?</summary><p>Yes, and it stays free. If you'd like to chip in anyway, you can <a href="/support/">support Lidlit</a>.</p></details>
-      <details><summary>Is it safe to install?</summary><p>Yes. Lidlit is signed with an Apple Developer ID and notarized by Apple, so it opens like any other Mac app. It runs on your Mac only and sends nothing anywhere.</p></details>
+      <details><summary>Is it safe to install?</summary><p>Yes. Lidlit is signed with an Apple Developer ID and notarized by Apple, so it opens like any other Mac app. The only thing it ever contacts is lidlit.app, about once a day, to see if there is a new version (sending only its version number). You can switch that off in Settings.</p></details>
     </div>
   </section>
 
@@ -696,6 +696,7 @@ function renderLogo(level) {
     'plus': '<path d="M12 4.5v15M4.5 12h15"/>',
     'laptopcomputer': '<rect x="4.5" y="5" width="15" height="10.5" rx="1.3"/><path d="M1.8 18.7h20.4"/>',
     'checkmark': '<path d="M4.5 12.8l4.6 4.7L19.5 6.5"/>',
+    'arrow.down.circle': '<circle cx="12" cy="12" r="9"/><path d="M12 7.5v8.5M8.2 12.5L12 16.3l3.8-3.8"/>',
     'power': '<path d="M12 3.5v8M7.2 6.4a7.3 7.3 0 1 0 9.6 0"/>',
     'arrow.counterclockwise': '<path d="M11 4.8a7.4 7.4 0 1 1-7.3 8.6"/><path d="M13.3 2.3L10.8 4.8l2.5 2.5"/>',
     'xmark': '<path d="M6 6l12 12M18 6L6 18"/>',
@@ -758,7 +759,7 @@ function renderLogo(level) {
   const MORSE = { A:'.-',B:'-...',C:'-.-.',D:'-..',E:'.',F:'..-.',G:'--.',H:'....',I:'..',J:'.---',K:'-.-',L:'.-..',M:'--',N:'-.',O:'---',P:'.--.',Q:'--.-',R:'.-.',S:'...',T:'-',U:'..-',V:'...-',W:'.--',X:'-..-',Y:'-.--',Z:'--..',
     0:'-----',1:'.----',2:'..---',3:'...--',4:'....-',5:'.....',6:'-....',7:'--...',8:'---..',9:'----.','.':'.-.-.-',',':'--..--','?':'..--..','!':'-.-.--','/':'-..-.','@':'.--.-.','-':'-....-',"'":'.----.','(':'-.--.',')':'-.--.-','&':'.-...',':':'---...','=':'-...-','+':'.-.-.','"':'.-..-.','Å':'.--.-','Ä':'.-.-','Ö':'---.' };
 
-  const S = { on: true, mode: 'breathe', lastOn: 'breathe', level: 60, breath: 5, auto: true, drawer: '',
+  const S = { autoUp: true, on: true, mode: 'breathe', lastOn: 'breathe', level: 60, breath: 5, auto: true, drawer: '',
     live: { claude: true, email: true }, pattern: {}, cueMorse: {}, openCue: null, info: false, copied: false,
     cueLevel: 100, cuesClosed: true, login: true, rules: [], unit: .25, saved: [] };
   const patternFor = c => S.pattern[c] || CUES[c].p;
@@ -874,6 +875,9 @@ function renderLogo(level) {
   function renderSettings() {
     $('login').className = 'lp-pill' + (S.login ? ' on' : '');
     $('login').innerHTML = icon(S.login ? 'checkmark' : 'power', 13, 'semibold') + 'At login';
+    $('autoup').className = 'lp-pill' + (S.autoUp ? ' on' : '');
+    $('autoup').innerHTML = icon(S.autoUp ? 'checkmark' : 'arrow.down.circle', 13, 'semibold') + 'Auto-update';
+    $('autoup').title = S.autoUp ? 'Checks for new versions about once a day. Click to turn off.' : 'Never checks for new versions. Click to turn on.';
     const rules = $('rules'); rules.hidden = !S.rules.length;
     const chip = (i, act, arg, ic, on, title) =>
       `<button class="lp-ichip${on ? ' on' : ''}" data-act="${act}" data-arg="${i}${arg != null ? ':' + arg : ''}" aria-label="${title}" data-tip="${title}">${icon(ic, 13)}</button>`;
@@ -954,7 +958,7 @@ function renderLogo(level) {
     'rule-mode': a => { const [i, m] = a.split(':'); S.rules[i].mode = m; },
     'rule-mute': i => { S.rules[i].mute = !S.rules[i].mute; },
     login: () => { S.login = !S.login; },
-    reset: () => { P = null; S.on = true; S.mode = S.lastOn = 'follow'; S.level = 100; S.auto = true; },
+    autoup: () => { S.autoUp = !S.autoUp; },
     quit: () => {},   // nothing to quit on a web page; the logo would keep its current look anyway
     live: id => { S.live[id] = !S.live[id]; if (!S.live[id] && SOURCES.find(s => s.id === id).cues.includes(S.openCue)) S.openCue = null; },
     sig: c => { S.openCue = S.openCue === c ? null : c; },

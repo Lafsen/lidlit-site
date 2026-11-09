@@ -35,5 +35,6 @@ Lidlit can be driven from the command line on the user's Mac (installed at `~/.l
 - CPU: 0.0 % at rest; while pulsing, macOS does the fading itself (about 2 % in its own brightness service).
 - Battery: the app barely does anything; the LED uses a little power, less at lower brightness.
 - Color: no. The logo has a single white light, so signals use rhythm instead.
-- Privacy: it never reads email or message contents, only Dock badge counts for apps you turn on. Nothing leaves the Mac.
+- Privacy: it never reads email or message contents, only Dock badge counts for apps you turn on. None of that leaves the Mac. The app checks lidlit.app for updates about once a day (sending only its version number); Settings › Auto-update turns that off.
+- Updates: built in (Sparkle), signed with Lidlit's own update key and notarized by Apple.
 - Undo: Reset hands the light back to macOS.
